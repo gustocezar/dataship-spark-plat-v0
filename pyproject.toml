@@ -1,0 +1,22 @@
+[project]
+name = "spark-plat-v0"
+version = "0.1.0"
+description = "Local Spark 4 platform for lakehouse and execution-observability experiments."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "PyYAML>=6.0.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+    "spark: tests that require a local PySpark runtime",
+]

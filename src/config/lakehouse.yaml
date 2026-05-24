@@ -1,0 +1,73 @@
+default:
+  app:
+    log_level: "INFO"
+
+  spark:
+    log_level: "WARN"
+    config:
+      spark.sql.extensions: "io.delta.sql.DeltaSparkSessionExtension"
+      spark.sql.catalog.spark_catalog: "org.apache.spark.sql.delta.catalog.DeltaCatalog"
+      spark.sql.adaptive.enabled: "true"
+      spark.sql.shuffle.partitions: "4"
+
+  lakehouse:
+    bucket: "${MINIO_LAKEHOUSE_BUCKET:-lakehouse}"
+    uri: "s3a://${MINIO_LAKEHOUSE_BUCKET:-lakehouse}"
+    layers:
+      landing:
+        path: "s3a://${MINIO_LAKEHOUSE_BUCKET:-lakehouse}/landing"
+      bronze:
+        path: "s3a://${MINIO_LAKEHOUSE_BUCKET:-lakehouse}/bronze"
+      silver:
+        path: "s3a://${MINIO_LAKEHOUSE_BUCKET:-lakehouse}/silver"
+      gold:
+        path: "s3a://${MINIO_LAKEHOUSE_BUCKET:-lakehouse}/gold"
+
+  entities:
+    customer:
+      description: "Customer entity used by the smoke pipeline."
+      landing:
+        read:
+          format: "json"
+          path: "s3a://${MINIO_LAKEHOUSE_BUCKET:-lakehouse}/landing/customer"
+          options: {}
+        write:
+          format: "json"
+          path: "s3a://${MINIO_LAKEHOUSE_BUCKET:-lakehouse}/landing/customer"
+          mode: "overwrite"
+          options: {}
+      bronze:
+        read:
+          format: "delta"
+          path: "s3a://${MINIO_LAKEHOUSE_BUCKET:-lakehouse}/bronze/customer"
+          options: {}
+        write:
+          format: "delta"
+          path: "s3a://${MINIO_LAKEHOUSE_BUCKET:-lakehouse}/bronze/customer"
+          mode: "overwrite"
+          options:
+            overwriteSchema: "true"
+      silver:
+        read:
+          format: "delta"
+          path: "s3a://${MINIO_LAKEHOUSE_BUCKET:-lakehouse}/silver/customer"
+          options: {}
+        write:
+          format: "delta"
+          path: "s3a://${MINIO_LAKEHOUSE_BUCKET:-lakehouse}/silver/customer"
+          mode: "overwrite"
+          options:
+            overwriteSchema: "true"
+      gold:
+        read:
+          format: "delta"
+          path: "s3a://${MINIO_LAKEHOUSE_BUCKET:-lakehouse}/gold/customer"
+          options: {}
+        write:
+          format: "delta"
+          path: "s3a://${MINIO_LAKEHOUSE_BUCKET:-lakehouse}/gold/customer"
+          mode: "overwrite"
+          options:
+            overwriteSchema: "true"
+
+local: {}

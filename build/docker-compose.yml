@@ -1,0 +1,156 @@
+name: spark-plat-v0
+
+x-spark-env: &spark-env
+  AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:-spv0minio}
+  AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:-spv0minio123}
+  AWS_REGION: us-east-1
+  AWS_DEFAULT_REGION: us-east-1
+  PYTHONPATH: /opt/spark/src
+  SPARK_PLAT_CONFIG_ENV: ${SPARK_PLAT_CONFIG_ENV:-local}
+
+services:
+  minio:
+    image: ${MINIO_IMAGE:-spark-plat-v0-minio:2025-09-07}
+    container_name: spv0-minio
+    command:
+      - server
+      - /data
+      - --console-address
+      - :9001
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-spv0minio}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-spv0minio123}
+    ports:
+      - "${MINIO_API_PORT:-29000}:9000"
+      - "${MINIO_CONSOLE_PORT:-29001}:9001"
+    volumes:
+      - ./var/minio-data:/data
+
+  minio-init:
+    image: ${MINIO_MC_IMAGE:-spark-plat-v0-minio-mc:2025-08-13}
+    container_name: spv0-minio-init
+    depends_on:
+      - minio
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-spv0minio}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-spv0minio123}
+      MINIO_LAKEHOUSE_BUCKET: ${MINIO_LAKEHOUSE_BUCKET:-lakehouse}
+      MINIO_LOG_BUCKET: ${MINIO_LOG_BUCKET:-spark-logs}
+
+  clickhouse:
+    image: ${CLICKHOUSE_IMAGE:-spark-plat-v0-clickhouse:26.5.1}
+    container_name: spv0-clickhouse
+    environment:
+      CLICKHOUSE_DB: ${CLICKHOUSE_DB:-spark_observability}
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER:-spv0}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:-spv0clickhouse123}
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
+    ports:
+      - "${CLICKHOUSE_HTTP_PORT:-28123}:8123"
+      - "${CLICKHOUSE_NATIVE_PORT:-29002}:9000"
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    healthcheck:
+      test: ["CMD-SHELL", "clickhouse-client --user $${CLICKHOUSE_USER} --password $${CLICKHOUSE_PASSWORD} --query 'SELECT 1'"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    volumes:
+      - ./var/clickhouse-data:/var/lib/clickhouse
+      - ./var/clickhouse-logs:/var/log/clickhouse-server
+      - ./clickhouse/init:/docker-entrypoint-initdb.d:ro
+
+  spark-master:
+    image: ${SPARK_RUNTIME_IMAGE:-spark-plat-v0-spark:4.1.2}
+    container_name: spv0-spark-master
+    depends_on:
+      minio-init:
+        condition: service_completed_successfully
+    environment: *spark-env
+    command:
+      - /opt/spark/bin/spark-class
+      - org.apache.spark.deploy.master.Master
+      - --host
+      - spark-master
+      - --port
+      - "7077"
+      - --webui-port
+      - "8080"
+    ports:
+      - "${SPARK_MASTER_UI_PORT:-28081}:8080"
+    volumes:
+      - ../src:/opt/spark/src:ro
+      - ./var/metrics:/opt/spark/metrics
+
+  spark-worker:
+    image: ${SPARK_RUNTIME_IMAGE:-spark-plat-v0-spark:4.1.2}
+    container_name: spv0-spark-worker-1
+    depends_on:
+      - spark-master
+    environment: *spark-env
+    command:
+      - /opt/spark/bin/spark-class
+      - org.apache.spark.deploy.worker.Worker
+      - spark://spark-master:7077
+      - --cores
+      - "${SPARK_WORKER_CORES:-1}"
+      - --memory
+      - "${SPARK_WORKER_MEMORY:-1g}"
+      - --webui-port
+      - "8081"
+    volumes:
+      - ../src:/opt/spark/src:ro
+      - ./var/metrics:/opt/spark/metrics
+
+  spark-history:
+    image: ${SPARK_HISTORY_IMAGE:-spark-plat-v0-spark-history:4.1.2}
+    container_name: spv0-spark-history
+    depends_on:
+      minio-init:
+        condition: service_completed_successfully
+      spark-master:
+        condition: service_started
+      spark-worker:
+        condition: service_started
+    environment:
+      <<: *spark-env
+      SPARK_HISTORY_OPTS: >-
+        -Dspark.history.fs.logDirectory=s3a://${MINIO_LOG_BUCKET:-spark-logs}/events
+        -Dspark.history.ui.port=18080
+        -Dspark.history.fs.update.interval=2s
+        -Dspark.hadoop.fs.s3a.endpoint=http://minio:9000
+        -Dspark.hadoop.fs.s3a.endpoint.region=us-east-1
+        -Dspark.hadoop.fs.s3a.path.style.access=true
+        -Dspark.hadoop.fs.s3a.connection.ssl.enabled=false
+        -Dspark.hadoop.fs.s3a.impl=org.apache.hadoop.fs.s3a.S3AFileSystem
+        -Dspark.hadoop.fs.s3a.aws.credentials.provider=software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider
+    ports:
+      - "${SPARK_HISTORY_UI_PORT:-28080}:18080"
+    volumes:
+      - ./var/metrics:/opt/spark/metrics
+
+  eventlog-loader:
+    profiles:
+      - tools
+    image: ${LOADER_IMAGE:-spark-plat-v0-eventlog-loader:go1.26}
+    container_name: spv0-eventlog-loader
+    depends_on:
+      minio-init:
+        condition: service_completed_successfully
+      clickhouse:
+        condition: service_healthy
+    environment:
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-spv0minio}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-spv0minio123}
+      MINIO_BUCKET: ${MINIO_LOG_BUCKET:-spark-logs}
+      MINIO_PREFIX: events/
+      MINIO_USE_SSL: "false"
+      CLICKHOUSE_ADDR: clickhouse:9000
+      CLICKHOUSE_DB: ${CLICKHOUSE_DB:-spark_observability}
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER:-spv0}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:-spv0clickhouse123}
+      LOADER_INTERVAL_SECONDS: "5"
+      LOADER_ONCE: "true"

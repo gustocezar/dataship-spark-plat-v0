@@ -1,0 +1,5 @@
+ARG MINIO_BASE_IMAGE=quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z-cpuv1
+FROM ${MINIO_BASE_IMAGE}
+
+LABEL org.opencontainers.image.title="spark-plat-v0-minio"
+LABEL org.opencontainers.image.description="Project-local MinIO server image wrapper for Spark Platform v0."
