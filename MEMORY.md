@@ -29,3 +29,12 @@
 [2026-05-24] (Mem-0027) Removed the obsolete compatibility lab and moved historical brainstorm notes to `docs/old-brainstorm` so final project code no longer carries root-level brainstorm artifacts.
 [2026-05-24] (Mem-0028) Documented the local bind-mount permission risk after E2E cleanup hit root-owned MinIO and ClickHouse files; operations docs now explain the `make clean-data` Docker-root fallback and recommended Spark user follow-up.
 [2026-05-24] (Mem-0029) Updated Spark runtime and Spark History images to return to the upstream `spark` user after root-only build steps, reducing local root-owned Spark artifacts while keeping stateful MinIO/ClickHouse cleanup fallback.
+[2026-05-24] (Mem-0030) Added `docs/assets/spark-platform-v0-visual-prompt.md` for generating the README visual asset, updated README with the future image link only, and refreshed `agent_readme.md` for the current no-compat-lab project state.
+[2026-05-24] (Mem-0032) Added `docs/machine-requirements.md`, linked it from README, and documented `make test` as the alias for `make tests` in agent/operations docs.
+[2026-05-24] (Mem-0033) Shortened `docs/machine-requirements.md`, added pinned runtime versions, and removed repeated verification commands.
+[2026-05-24] (Mem-0034) Refocused `docs/machine-requirements.md` on host CLI versions and install instructions only, removing runtime/ports/cleanup content from that page.
+[2026-05-24] (Mem-0035) Moved architecture, compatibility, and operations docs under `docs/dev-design` and added a feature-oriented Spark design discussion under the dev-design docs.
+[2026-05-24] (Mem-0036) Reworked the Spark patterns doc into `docs/dev-design/design-pattern-v0-disccusion.md`, focusing on the rationale and valuation of lightweight guardrails for the v0 Spark optimization platform.
+[2026-05-24] (Mem-0037) Refocused `docs/dev-design/design-pattern-v0-disccusion.md` around the agentic Spark code optimization goal, emphasizing lightweight guardrails to reduce agent drift without making architecture the product.
+[2026-05-24] (Mem-0038) Updated the design-pattern discussion with agentic coding references, clarified that the sanity-check split is basic Spark hygiene, and marked the valuation sections as Codex GPT-5-based opinion.
+[2026-05-24] (Mem-0039) Reworked external references in the design-pattern discussion toward software engineering practices and repository-level agent guidance that reduce coding drift.

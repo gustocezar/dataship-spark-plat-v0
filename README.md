@@ -1,20 +1,25 @@
 # Spark Platform v0
 
+![Spark Platform v0 architecture](docs/assets/spark-platform-v0-architecture.png)
+
 Local Spark platform for validating Spark 4.1.2, Delta Lake 4.2.0, MinIO-backed lakehouse data, Spark event logs, Spark History, and ClickHouse-based execution observability.
 
 ## Quick Start
+
+Before setup, check [docs/machine-requirements.md](docs/machine-requirements.md) for required host tools, validated versions, and install notes.
 
 ```bash
 make bootstrap
 make build
 make validate
+make tests
 make compose
 make smoke
 make spark-logs
 make services
 ```
 
-Use `make down` to stop the stack without deleting local data. Use `make removeimage` to remove only the local project images while preserving downloaded jars, Python wheels, and vendored Go dependencies.
+Use `make down` to stop the stack without deleting local data. Use `make clean-data` to delete local MinIO and ClickHouse state. Use `make removeimage` to remove only the local project images while preserving downloaded jars, Python wheels, and vendored Go dependencies.
 
 ## Service Roles
 
@@ -35,22 +40,30 @@ Use `make down` to stop the stack without deleting local data. Use `make removei
 - `spark-plat-v0-clickhouse:26.5.1`
 - `spark-plat-v0-eventlog-loader:go1.26`
 
+Spark runtime and Spark History run as the upstream Spark user, `uid=185(spark)`, after root-only image build steps complete.
+
 ## Documentation
 
+- `docs/dev-design/architecture.md`: architecture decisions and component responsibilities.
+- `docs/dev-design/operations.md`: operational commands, cleanup behavior, credentials, and service access.
+- `docs/dev-design/design-pattern-v0-disccusion.md`: agentic Spark optimization guardrail rationale and design discussion.
+- `docs/machine-requirements.md`: required host tools, validated versions, and install notes.
+- `docs/dev-design/compatibility.md`: version compatibility notes.
 - `docs/next-steps.md`: current roadmap and low-hanging improvements.
 - `docs/logs-info/README.md`: Spark event-log and ClickHouse observability guide.
 - `agent_readme.md`: handoff context for agents continuing the project.
 
 ## Spark App Utilities
 
-The smoke job now uses reusable Python utilities under `src/spark_platform`:
+Sample jobs use reusable Python utilities under `src/spark_platform`:
 
 - `config/loader.py`: loads `src/config/lakehouse.yaml` and resolves entity/layer read-write settings.
 - `session/factory.py`: creates a default Delta-enabled Spark session that scripts can extend with extra Spark config.
 - `io/specs.py`: validates read/write specs before IO execution.
-- `io/datasets.py`: public read/write helpers for Delta and JSON reads plus Delta writes.
+- `io/datasets.py`: public read/write helpers for Delta and JSON reads plus Delta and JSON writes.
 - `jobs/base.py`: ABC/template contract for app scripts.
 - `utils/logger.py`: project logger adapted from the formation repository pattern.
+- `utils/plan_debug.py`: commented optional reference for direct DataFrame physical-plan inspection during local development.
 
 The current example entity is `customer`. `make smoke` persists sample JSON to `s3a://lakehouse/landing/customer`, runs the contract-based bronze job to `s3a://lakehouse/bronze/customer`, then runs a sanity check over both layers. Spark app names are owned by runner scripts, with `SparkSessionFactory.DEFAULT_APP_NAME` used only as a fallback.
 
@@ -67,4 +80,6 @@ Python tests are managed with `uv` from the project root. The fast IO tests use 
 
 ```bash
 make tests
+# or
+make test
 ```

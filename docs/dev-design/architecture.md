@@ -49,7 +49,7 @@ This keeps failure modes clear and makes the command easy to wrap later in a ric
 
 The Compose stack keeps MinIO and ClickHouse state in project bind mounts under `build/var` so users can inspect local data without Docker volume tooling. The tradeoff is host-file ownership friction: stateful services may write files as container users/root.
 
-This was observed during local cleanup on May 24, 2026, when MinIO and ClickHouse files could not be removed by the host user. The operational mitigation is documented in `docs/operations.md` under `Permission Risk Note`.
+This was observed during local cleanup on May 24, 2026, when MinIO and ClickHouse files could not be removed by the host user. The operational mitigation is documented in `docs/dev-design/operations.md` under `Permission Risk Note`.
 
 ## Buckets
 

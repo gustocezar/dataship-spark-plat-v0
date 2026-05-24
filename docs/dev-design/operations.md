@@ -10,7 +10,10 @@ make compose      # start MinIO, ClickHouse, Spark master, worker, and History
 make smoke        # run landing ingestion, bronze Delta job, sanity check, then verify History and MinIO outputs
 make spark-logs   # load Spark event logs from MinIO into ClickHouse
 make services     # print URLs, credentials, and UI setup steps
+make tests        # run fast Python unit tests through uv
+make test         # alias for make tests
 make down         # stop the stack without deleting local data
+make clean-data   # delete local MinIO and ClickHouse data
 make removeimage  # remove only local project images; keep jars and dependency caches
 ```
 
