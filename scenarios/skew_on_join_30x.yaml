@@ -1,7 +1,7 @@
 scenario_id: skew_on_join_30x
-version: 1
+version: 2
 owner: pod-a1
-status: validated
+status: prototype          # honesto: validado pelo loop de CI abaixo, nao "validated" a mao
 
 anti_pattern:
   class: data_skew_on_join_key
@@ -10,33 +10,35 @@ anti_pattern:
 code_generator:
   language: pyspark
   emits: job.py
-  anti_pattern_line: 58
+  # CONTRATO: o anti-pattern DEVE cair nesta linha. O gerador ASSERTA isso (guard),
+  # entao contrato e codigo nunca divergem em silencio. Era o defeito #1.
+  anti_pattern_line: 21
   data:
-    orders:
-      rows: 200000
-      distinct_keys: 100
-      hot_key: 7
-      hot_share: 0.80
-    customers:
-      rows: 100
-      distinct_keys: 100
+    orders:    { rows: 200000, distinct_keys: 100, hot_key: 7, hot_share: 0.80 }
+    customers: { rows: 100, distinct_keys: 100 }
   spark_config:
-    spark.sql.adaptive.enabled: "true"
+    spark.sql.adaptive.enabled: "false"
     spark.sql.adaptive.skewJoin.enabled: "false"
     spark.sql.autoBroadcastJoinThreshold: "-1"
     spark.sql.shuffle.partitions: "8"
+    spark.sql.adaptive.coalescePartitions.enabled: "false"
+    spark.sql.adaptive.autoBroadcastJoinThreshold: "-1"
 
 plan_generator:
   emits: event-log.ndjson
   strategy: synthesize
+  # A distribuicao e DERIVADA dos dados acima (nao hardcoded). Era o defeito #3.
   expected_signals:
     join_operator: SortMergeJoin
-    hot_partition: { stage: 4, single_task_shuffle_read_records: 200100 }
+    hot_stage: 4
+    skew_ratio_min: 10        # task quente / mediana das frias deve passar disto
 
 oracle:
   enabled: true
   cadence: weekly
+  tolerance: { skew_ratio: 0.30, records: 0.25 }
   on_divergence: fail_and_open_issue
 
 acceptance:
   root_cause_includes: ["data skew", "customer_id", "SortMergeJoin"]
+  min_recommendations: 1
