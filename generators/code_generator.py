@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
 """
-Gerador de codigo (v2). Le o scenario.yaml e emite um job PySpark com o bug.
+Gerador de codigo (v3) — sentinela em vez de linha absoluta no contrato.
 
-Correcao do defeito #1: a linha do anti-pattern nao e mais uma ficcao no YAML.
-O gerador CONSTROI o job de forma deterministica para que o join caia exatamente
-na linha declarada no contrato, e ASSERTA isso antes de gravar. Se alguem mexer no
-template e a linha mudar, o gerador FALHA -- contrato e codigo nunca divergem em
-silencio. E o principio "eval como teste" aplicado ao proprio gerador.
+Mudanca vs v2: a linha do anti-pattern deixou de ser um INPUT fragil no scenario (que
+quebrava o guard a cada mudanca de config). Agora e um OUTPUT derivado:
+- o template marca o anti-pattern com um comentario-sentinela `# APEX::ANTIPATTERN`;
+- o gerador acha a linha do sentinela apos renderizar (sempre correta por construcao);
+- grava num manifesto `<job>.meta.json` (a coordenada que o CodeGrounder usa na Lane 2);
+- se o scenario declarar uma linha esperada, AVISA na divergencia (nao derruba o build).
 """
-import yaml
 import sys
+import json
+import yaml
+
+SENTINEL = "# APEX::ANTIPATTERN"
 
 
 def build_job_source(config):
@@ -19,8 +23,7 @@ def build_job_source(config):
     conf = cfg.get("spark_config", {})
     conf_lines = "".join(f'    .config("{k}", "{v}")\n' for k, v in conf.items())
 
-    # O cabecalho e construido para que a linha do JOIN seja deterministica.
-    header = f'''# Auto-gerado por code_generator v2 -- scenario: {sid}
+    header = f'''# Auto-gerado por code_generator v3 — scenario: {sid}
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, rand, when
 
@@ -35,33 +38,41 @@ orders = orders.withColumn('customer_id',
 customers = spark.range({data['customers']['rows']}).select(
     col('id').alias('customer_id'), col('id').alias('customer_name'))
 '''
-    # A proxima linha apos o header e o join. Calculamos seu numero.
-    join_line_no = len(header.splitlines()) + 1
-    body = '''result = orders.join(customers.hint("shuffle_merge"), "customer_id", "inner")   # <<< ANTI-PATTERN: skew join
+    body = f'''result = orders.join(customers.hint("shuffle_merge"), "customer_id", "inner")  {SENTINEL}
 result.write.mode("overwrite").parquet("/tmp/apex_output")
 spark.stop()
 '''
-    return header + body, join_line_no
+    source = header + body
+    line = next(i for i, l in enumerate(source.splitlines(), 1) if SENTINEL in l)
+    return source, line
 
 
 def generate_job(scenario_path, output_path):
-    with open(scenario_path) as f:
-        config = yaml.safe_load(f)
-
-    declared = config["code_generator"]["anti_pattern_line"]
-    source, actual = build_job_source(config)
-
-    # GUARD: o contrato e o codigo TEM que concordar sobre a linha.
-    if actual != declared:
-        raise SystemExit(
-            f"❌ DIVERGENCIA DE CONTRATO: o anti-pattern caiu na linha {actual}, "
-            f"mas o scenario.yaml declara {declared}. Ajuste anti_pattern_line para {actual} "
-            f"(ou corrija o template). Contrato e codigo nao podem divergir."
-        )
+    config = yaml.safe_load(open(scenario_path))
+    source, actual_line = build_job_source(config)
 
     with open(output_path, "w") as f:
         f.write(source)
-    print(f"✅ {output_path} gerado. Anti-pattern na linha {actual} (== contrato). Guard OK.")
+
+    # A linha e um OUTPUT derivado -> manifesto (usado na correlacao codigo<->log, Lane 2).
+    manifest = {
+        "scenario_id": config["scenario_id"],
+        "job_file": output_path,
+        "anti_pattern_line": actual_line,
+        "anti_pattern_class": config["anti_pattern"]["class"],
+    }
+    meta_path = output_path.rsplit(".", 1)[0] + ".meta.json"
+    with open(meta_path, "w") as f:
+        json.dump(manifest, f, indent=2)
+
+    declared = config["code_generator"].get("anti_pattern_line")
+    if declared is not None and declared != actual_line:
+        print(
+            f"⚠️  scenario declara anti_pattern_line={declared}, mas caiu na {actual_line}. "
+            f"Manifesto registra a linha real ({actual_line}); atualize o scenario se quiser.",
+            file=sys.stderr,
+        )
+    print(f"✅ {output_path} gerado. Anti-pattern na linha {actual_line}. Manifesto: {meta_path}")
 
 
 if __name__ == "__main__":

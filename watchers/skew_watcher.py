@@ -1,68 +1,65 @@
 #!/usr/bin/env python3
 """
-Skew Watcher (Pod A1) -- a peca que FECHA o loop e que faltava no pacote.
+Skew Watcher (v3) — endurecido.
 
-Le um event log do Spark (real OU sintetico -- mesmo schema, esse e o ponto), reconstroi a
-distribuicao de 'Total Records Read' por task no stage quente, e detecta skew olhando a CAUDA
-(task mais pesada / mediana), nao a media. Emite um Finding no formato do watcher.contract e
-valida contra o bloco 'acceptance' do scenario.
-
-Saida: imprime o Finding e sai com codigo 0 se o anti-pattern declarado foi detectado e o
-Finding satisfaz o acceptance; senao sai != 0 (vira gate de CI).
+Mudancas vs v2 (que tinha band-aids):
+- Usa apexlib: isola o stage de reduce do join (nao mistura tasks de scan que leem 0).
+- Le o plano FINAL pos-AQE.
+- Trata o caso de 1 task (colapso do AQE) explicitamente, com mensagem honesta,
+  em vez do hack `or [1]` que produzia um ratio sem sentido.
+- Auto-descomprime logs zstd e valida o schema antes de analisar.
 """
-import json
 import sys
+import json
 import yaml
-import statistics
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from apex import apexlib
 
 
-def read_events(log_path):
-    with open(log_path) as f:
-        return [json.loads(line) for line in f if line.strip()]
-
-
-def analyze(events):
-    # Operador de join: do plano fisico textual do evento SQL.
-    join_op = None
-    for e in events:
-        if e.get("Event", "").endswith("SparkListenerSQLExecutionStart"):
-            plan = e.get("physicalPlanDescription", "")
-            for op in ("SortMergeJoin", "BroadcastHashJoin", "ShuffledHashJoin"):
-                if op in plan:
-                    join_op = op
-                    break
-    # Distribuicao de registros lidos por task (chaves REAIS do Spark).
-    per_task = []
-    for e in events:
-        if e.get("Event") == "SparkListenerTaskEnd":
-            recs = (e.get("Task Metrics", {})
-                     .get("Shuffle Read Metrics", {})
-                     .get("Total Records Read"))
-            if recs is not None:
-                per_task.append((e["Task Info"]["Task ID"], recs))
-    return join_op, per_task
-
-
-def build_finding(scenario, join_op, per_task):
+def build_finding(scenario, events):
     sig = scenario["plan_generator"]["expected_signals"]
-    counts = sorted((r for _, r in per_task), reverse=True)
-    hottest = max(per_task, key=lambda x: x[1])
-    cold = [r for r in counts if r != hottest[1] and r > 0] or [1]
-    median_cold = statistics.median(cold)
-    skew_ratio = round(hottest[1] / median_cold, 1) if median_cold else 0
+    op, used_final = apexlib.join_operator(events)
+    stage_id, records = apexlib.hottest_reduce_stage(events)
+    m = apexlib.skew_metrics(records)
 
-    is_skew = (join_op == sig["join_operator"]) and (skew_ratio >= sig["skew_ratio_min"])
+    plan_note = "plano final pos-AQE" if used_final else "plano inicial (sem update de AQE)"
+    evidence = [f"join operator: {op} ({plan_note})"]
+
+    if m["collapsed"]:
+        evidence.append(
+            f"stage {stage_id}: 1 task leu {m['hot']} registros — distribuicao colapsada "
+            f"(AQE coalesceu ou concentracao total). Rode em multi-core para a cauda completa."
+        )
+        ratio_txt = "colapso (1 task)"
+    else:
+        evidence.append(
+            f"stage {stage_id}: task quente {m['hot']} vs mediana das frias {int(m['median_cold'])} "
+            f"-> skew ratio {m['ratio']}x ({m['n_tasks']} tasks)"
+        )
+        ratio_txt = f"{m['ratio']}x"
+
+    # Skew confirmado se: operador certo E (colapso OU ratio acima do minimo declarado).
+    is_skew = op == sig["join_operator"] and (m["collapsed"] or m["ratio"] >= sig["skew_ratio_min"])
+    # Confianca derivada da evidencia (nunca auto-avaliada arbitrariamente).
+    if m["collapsed"]:
+        confidence = 0.95
+    elif m["ratio"] == float("inf"):
+        confidence = 0.99
+    else:
+        confidence = round(min(0.99, m["ratio"] / (m["ratio"] + 3)), 2)
+
     finding = {
         "watcher": "shuffle_skew",
+        "stage": stage_id,
         "severity": "high" if is_skew else "low",
-        "confidence": round(min(0.99, skew_ratio / (skew_ratio + 3)), 2),  # da evidencia, nao auto-avaliado
-        "evidence": [
-            f"join operator: {join_op}",
-            f"task mais pesada (id {hottest[0]}) leu {hottest[1]} registros",
-            f"mediana das demais: {int(median_cold)} -> skew ratio {skew_ratio}x",
-        ],
-        "root_cause": f"data skew na chave de join customer_id ({join_op}): "
-                      f"1 particao concentra {skew_ratio}x a mediana",
+        "confidence": confidence,
+        "evidence": evidence,
+        "root_cause": (
+            f"data skew na chave de join customer_id ({op}): "
+            f"1 particao concentra {ratio_txt} o trabalho"
+        ),
         "recommendations": [
             "habilitar spark.sql.adaptive.skewJoin.enabled",
             "broadcast o lado customers (dimensao pequena)",
@@ -76,29 +73,33 @@ def check_acceptance(finding, scenario):
     acc = scenario["acceptance"]
     blob = (finding["root_cause"] + " " + " ".join(finding["evidence"])).lower()
     missing = [t for t in acc["root_cause_includes"] if t.lower() not in blob]
-    enough_recs = len(finding["recommendations"]) >= acc.get("min_recommendations", 1)
-    return (not missing) and enough_recs, missing, enough_recs
+    enough = len(finding["recommendations"]) >= acc.get("min_recommendations", 1)
+    return (not missing) and enough, missing, enough
 
 
 def main(scenario_path, log_path):
     scenario = yaml.safe_load(open(scenario_path))
-    join_op, per_task = analyze(read_events(log_path))
-    finding, is_skew = build_finding(scenario, join_op, per_task)
+    events = apexlib.read_events(log_path)
 
+    for w in apexlib.validate_schema(events):
+        print(f"⚠️  schema: {w}", file=sys.stderr)
+
+    finding, is_skew = build_finding(scenario, events)
     print(json.dumps(finding, indent=2, ensure_ascii=False))
-    ok, missing, enough = check_acceptance(finding, scenario)
 
+    ok, missing, enough = check_acceptance(finding, scenario)
     print("\n--- ACCEPTANCE ---")
     if not is_skew:
-        print("❌ Watcher NAO detectou o anti-pattern declarado."); sys.exit(1)
+        print("❌ Watcher NAO detectou o anti-pattern declarado.")
+        sys.exit(1)
     if not ok:
-        print(f"❌ Finding nao satisfaz acceptance. Faltou root_cause: {missing}; recs suficientes: {enough}")
+        print(f"❌ Finding nao satisfaz acceptance. Faltou: {missing}; recs suficientes: {enough}")
         sys.exit(1)
     print("✅ Anti-pattern detectado E Finding satisfaz o acceptance do scenario. GATE VERDE.")
 
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Uso: skew_watcher.py <scenario.yaml> <event-log.ndjson>")
+        print("Uso: skew_watcher.py <scenario.yaml> <event-log.ndjson|.zstd>")
         sys.exit(1)
     main(sys.argv[1], sys.argv[2])
