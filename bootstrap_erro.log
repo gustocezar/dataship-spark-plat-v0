@@ -1,0 +1,576 @@
+Added missing .env key: 
+Added missing .env key: 
+Added missing .env key: 
+Added missing .env key: 
+Added missing .env key: 
+uv found: /c/Users/Guest/AppData/Local/com.Langflow/uv/uv
+Syncing project Python dependencies with uv...
+Resolved 11 packages in 28ms
+Audited 7 packages in 0.70ms
+Pulling required base images...
+4.1.2-scala2.13-java17-python3-ubuntu: Pulling from apache/spark
+Digest: sha256:7f44fcdd38baa7bb6fdf97f84bc12d282655d8258001a9f60287a70fb9e5033e
+Status: Image is up to date for apache/spark:4.1.2-scala2.13-java17-python3-ubuntu
+docker.io/apache/spark:4.1.2-scala2.13-java17-python3-ubuntu
+1.26-bookworm: Pulling from library/golang
+Digest: sha256:386d475a660466863d9f8c766fec64d7fdad3edac2c6a05020c09534d71edb4b
+Status: Image is up to date for golang:1.26-bookworm
+docker.io/library/golang:1.26-bookworm
+RELEASE.2025-09-07T16-13-09Z-cpuv1: Pulling from minio/minio
+Digest: sha256:13582eff79c6605a2d315bdd0e70164142ea7e98fc8411e9e10d089502a6d883
+Status: Image is up to date for quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z-cpuv1
+quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z-cpuv1
+RELEASE.2025-08-13T08-35-41Z-cpuv1: Pulling from minio/mc
+Digest: sha256:95b5f3f7969a5c5a9f3a700ba72d5c84172819e13385aaf916e237cf111ab868
+Status: Image is up to date for quay.io/minio/mc:RELEASE.2025-08-13T08-35-41Z-cpuv1
+quay.io/minio/mc:RELEASE.2025-08-13T08-35-41Z-cpuv1
+26.5.1-jammy: Pulling from library/clickhouse
+Digest: sha256:770156c537ca9124046e138a3b5845c64ea58ce8722de7a2e05fd827f4976520
+Status: Image is up to date for clickhouse:26.5.1-jammy
+docker.io/library/clickhouse:26.5.1-jammy
+Resolving Spark, Delta, and S3A jars into build/config/spark/jars...
+WARNING: Using incubator modules: jdk.incubator.vector
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+Ivy Default Cache set to: /root/.ivy2.5.2/cache
+The jars for the packages stored in: /root/.ivy2.5.2/jars
+io.delta#delta-spark_4.1_2.13 added as a dependency
+org.apache.hadoop#hadoop-aws added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-eb080010-b4d3-4aa5-87c8-09bb56937009;1.0
+	confs: [default]
+	found io.delta#delta-spark_4.1_2.13;4.2.0 in central
+	found io.delta#delta-storage;4.2.0 in central
+	found io.unitycatalog#unitycatalog-client;0.4.1 in central
+	found org.slf4j#slf4j-api;2.0.13 in central
+	found org.apache.logging.log4j#log4j-slf4j2-impl;2.25.3 in central
+	found org.apache.logging.log4j#log4j-api;2.25.3 in central
+	found com.google.code.findbugs#jsr305;3.0.2 in central
+	found org.apache.logging.log4j#log4j-core;2.25.3 in central
+	found io.delta#delta-kernel-api;4.2.0 in central
+	found org.roaringbitmap#RoaringBitmap;0.9.25 in central
+	found com.fasterxml.jackson.core#jackson-databind;2.13.5 in central
+	found com.fasterxml.jackson.core#jackson-annotations;2.13.5 in central
+	found com.fasterxml.jackson.core#jackson-core;2.13.5 in central
+	found com.fasterxml.jackson.datatype#jackson-datatype-jdk8;2.13.5 in central
+	found org.roaringbitmap#shims;0.9.25 in central
+	found io.delta#delta-kernel-defaults;4.2.0 in central
+	found org.apache.hadoop#hadoop-client-runtime;3.4.2 in central
+	found org.apache.parquet#parquet-hadoop;1.16.0 in central
+	found org.apache.parquet#parquet-column;1.16.0 in central
+	found org.apache.parquet#parquet-common;1.16.0 in central
+	found org.apache.parquet#parquet-format-structures;1.16.0 in central
+	found javax.annotation#javax.annotation-api;1.3.2 in central
+	found org.apache.parquet#parquet-encoding;1.16.0 in central
+	found org.locationtech.jts#jts-core;1.20.0 in central
+	found org.xerial.snappy#snappy-java;1.1.10.7 in central
+	found io.airlift#aircompressor;2.0.2 in central
+	found commons-pool#commons-pool;1.6 in central
+	found com.github.luben#zstd-jni;1.5.7-3 in central
+	found org.apache.hadoop#hadoop-client-api;3.4.2 in central
+	found commons-logging#commons-logging;1.3.0 in central
+	found org.apache.parquet#parquet-jackson;1.16.0 in central
+	found io.delta#delta-kernel-unitycatalog;4.2.0 in central
+	found org.apache.hadoop#hadoop-aws;3.4.2 in central
+	found software.amazon.awssdk#bundle;2.29.52 in central
+	found software.amazon.s3.analyticsaccelerator#analyticsaccelerator-s3;1.2.1 in central
+	found org.wildfly.openssl#wildfly-openssl;2.1.4.Final in central
+downloading https://repo1.maven.org/maven2/io/delta/delta-spark_4.1_2.13/4.2.0/delta-spark_4.1_2.13-4.2.0.jar ...
+	[SUCCESSFUL ] io.delta#delta-spark_4.1_2.13;4.2.0!delta-spark_4.1_2.13.jar (1184ms)
+downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.4.2/hadoop-aws-3.4.2.jar ...
+	[SUCCESSFUL ] org.apache.hadoop#hadoop-aws;3.4.2!hadoop-aws.jar (204ms)
+downloading https://repo1.maven.org/maven2/io/delta/delta-storage/4.2.0/delta-storage-4.2.0.jar ...
+	[SUCCESSFUL ] io.delta#delta-storage;4.2.0!delta-storage.jar (112ms)
+downloading https://repo1.maven.org/maven2/io/delta/delta-kernel-api/4.2.0/delta-kernel-api-4.2.0.jar ...
+	[SUCCESSFUL ] io.delta#delta-kernel-api;4.2.0!delta-kernel-api.jar (425ms)
+downloading https://repo1.maven.org/maven2/io/delta/delta-kernel-defaults/4.2.0/delta-kernel-defaults-4.2.0.jar ...
+	[SUCCESSFUL ] io.delta#delta-kernel-defaults;4.2.0!delta-kernel-defaults.jar (143ms)
+downloading https://repo1.maven.org/maven2/io/delta/delta-kernel-unitycatalog/4.2.0/delta-kernel-unitycatalog-4.2.0.jar ...
+	[SUCCESSFUL ] io.delta#delta-kernel-unitycatalog;4.2.0!delta-kernel-unitycatalog.jar (106ms)
+downloading https://repo1.maven.org/maven2/io/unitycatalog/unitycatalog-client/0.4.1/unitycatalog-client-0.4.1.jar ...
+	[SUCCESSFUL ] io.unitycatalog#unitycatalog-client;0.4.1!unitycatalog-client.jar (192ms)
+downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/2.0.13/slf4j-api-2.0.13.jar ...
+	[SUCCESSFUL ] org.slf4j#slf4j-api;2.0.13!slf4j-api.jar (126ms)
+downloading https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-slf4j2-impl/2.25.3/log4j-slf4j2-impl-2.25.3.jar ...
+	[SUCCESSFUL ] org.apache.logging.log4j#log4j-slf4j2-impl;2.25.3!log4j-slf4j2-impl.jar (111ms)
+downloading https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.25.3/log4j-api-2.25.3.jar ...
+	[SUCCESSFUL ] org.apache.logging.log4j#log4j-api;2.25.3!log4j-api.jar (176ms)
+downloading https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar ...
+	[SUCCESSFUL ] com.google.code.findbugs#jsr305;3.0.2!jsr305.jar (102ms)
+downloading https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.25.3/log4j-core-2.25.3.jar ...
+	[SUCCESSFUL ] org.apache.logging.log4j#log4j-core;2.25.3!log4j-core.jar (409ms)
+downloading https://repo1.maven.org/maven2/org/roaringbitmap/RoaringBitmap/0.9.25/RoaringBitmap-0.9.25.jar ...
+	[SUCCESSFUL ] org.roaringbitmap#RoaringBitmap;0.9.25!RoaringBitmap.jar (184ms)
+downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.13.5/jackson-databind-2.13.5.jar ...
+	[SUCCESSFUL ] com.fasterxml.jackson.core#jackson-databind;2.13.5!jackson-databind.jar(bundle) (373ms)
+downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.13.5/jackson-core-2.13.5.jar ...
+	[SUCCESSFUL ] com.fasterxml.jackson.core#jackson-core;2.13.5!jackson-core.jar(bundle) (170ms)
+downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.13.5/jackson-annotations-2.13.5.jar ...
+	[SUCCESSFUL ] com.fasterxml.jackson.core#jackson-annotations;2.13.5!jackson-annotations.jar(bundle) (125ms)
+downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.13.5/jackson-datatype-jdk8-2.13.5.jar ...
+	[SUCCESSFUL ] com.fasterxml.jackson.datatype#jackson-datatype-jdk8;2.13.5!jackson-datatype-jdk8.jar(bundle) (101ms)
+downloading https://repo1.maven.org/maven2/org/roaringbitmap/shims/0.9.25/shims-0.9.25.jar ...
+	[SUCCESSFUL ] org.roaringbitmap#shims;0.9.25!shims.jar (97ms)
+downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client-runtime/3.4.2/hadoop-client-runtime-3.4.2.jar ...
+	[SUCCESSFUL ] org.apache.hadoop#hadoop-client-runtime;3.4.2!hadoop-client-runtime.jar (4908ms)
+downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-hadoop/1.16.0/parquet-hadoop-1.16.0.jar ...
+	[SUCCESSFUL ] org.apache.parquet#parquet-hadoop;1.16.0!parquet-hadoop.jar (594ms)
+downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-column/1.16.0/parquet-column-1.16.0.jar ...
+	[SUCCESSFUL ] org.apache.parquet#parquet-column;1.16.0!parquet-column.jar (966ms)
+downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-format-structures/1.16.0/parquet-format-structures-1.16.0.jar ...
+	[SUCCESSFUL ] org.apache.parquet#parquet-format-structures;1.16.0!parquet-format-structures.jar (257ms)
+downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-common/1.16.0/parquet-common-1.16.0.jar ...
+	[SUCCESSFUL ] org.apache.parquet#parquet-common;1.16.0!parquet-common.jar (137ms)
+downloading https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.10.7/snappy-java-1.1.10.7.jar ...
+	[SUCCESSFUL ] org.xerial.snappy#snappy-java;1.1.10.7!snappy-java.jar(bundle) (503ms)
+downloading https://repo1.maven.org/maven2/io/airlift/aircompressor/2.0.2/aircompressor-2.0.2.jar ...
+	[SUCCESSFUL ] io.airlift#aircompressor;2.0.2!aircompressor.jar (151ms)
+downloading https://repo1.maven.org/maven2/commons-pool/commons-pool/1.6/commons-pool-1.6.jar ...
+	[SUCCESSFUL ] commons-pool#commons-pool;1.6!commons-pool.jar (119ms)
+downloading https://repo1.maven.org/maven2/com/github/luben/zstd-jni/1.5.7-3/zstd-jni-1.5.7-3.jar ...
+	[SUCCESSFUL ] com.github.luben#zstd-jni;1.5.7-3!zstd-jni.jar (1318ms)
+downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-encoding/1.16.0/parquet-encoding-1.16.0.jar ...
+	[SUCCESSFUL ] org.apache.parquet#parquet-encoding;1.16.0!parquet-encoding.jar (245ms)
+downloading https://repo1.maven.org/maven2/org/locationtech/jts/jts-core/1.20.0/jts-core-1.20.0.jar ...
+	[SUCCESSFUL ] org.locationtech.jts#jts-core;1.20.0!jts-core.jar(bundle) (311ms)
+downloading https://repo1.maven.org/maven2/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar ...
+	[SUCCESSFUL ] javax.annotation#javax.annotation-api;1.3.2!javax.annotation-api.jar (112ms)
+downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client-api/3.4.2/hadoop-client-api-3.4.2.jar ...
+	[SUCCESSFUL ] org.apache.hadoop#hadoop-client-api;3.4.2!hadoop-client-api.jar (2994ms)
+downloading https://repo1.maven.org/maven2/commons-logging/commons-logging/1.3.0/commons-logging-1.3.0.jar ...
+	[SUCCESSFUL ] commons-logging#commons-logging;1.3.0!commons-logging.jar (119ms)
+downloading https://repo1.maven.org/maven2/org/apache/parquet/parquet-jackson/1.16.0/parquet-jackson-1.16.0.jar ...
+	[SUCCESSFUL ] org.apache.parquet#parquet-jackson;1.16.0!parquet-jackson.jar (496ms)
+downloading https://repo1.maven.org/maven2/software/amazon/awssdk/bundle/2.29.52/bundle-2.29.52.jar ...
+	[SUCCESSFUL ] software.amazon.awssdk#bundle;2.29.52!bundle.jar (107733ms)
+downloading https://repo1.maven.org/maven2/software/amazon/s3/analyticsaccelerator/analyticsaccelerator-s3/1.2.1/analyticsaccelerator-s3-1.2.1.jar ...
+	[SUCCESSFUL ] software.amazon.s3.analyticsaccelerator#analyticsaccelerator-s3;1.2.1!analyticsaccelerator-s3.jar (770ms)
+downloading https://repo1.maven.org/maven2/org/wildfly/openssl/wildfly-openssl/2.1.4.Final/wildfly-openssl-2.1.4.Final.jar ...
+	[SUCCESSFUL ] org.wildfly.openssl#wildfly-openssl;2.1.4.Final!wildfly-openssl.jar (242ms)
+:: resolution report :: resolve 36302ms :: artifacts dl 126383ms
+	:: modules in use:
+	com.fasterxml.jackson.core#jackson-annotations;2.13.5 from central in [default]
+	com.fasterxml.jackson.core#jackson-core;2.13.5 from central in [default]
+	com.fasterxml.jackson.core#jackson-databind;2.13.5 from central in [default]
+	com.fasterxml.jackson.datatype#jackson-datatype-jdk8;2.13.5 from central in [default]
+	com.github.luben#zstd-jni;1.5.7-3 from central in [default]
+	com.google.code.findbugs#jsr305;3.0.2 from central in [default]
+	commons-logging#commons-logging;1.3.0 from central in [default]
+	commons-pool#commons-pool;1.6 from central in [default]
+	io.airlift#aircompressor;2.0.2 from central in [default]
+	io.delta#delta-kernel-api;4.2.0 from central in [default]
+	io.delta#delta-kernel-defaults;4.2.0 from central in [default]
+	io.delta#delta-kernel-unitycatalog;4.2.0 from central in [default]
+	io.delta#delta-spark_4.1_2.13;4.2.0 from central in [default]
+	io.delta#delta-storage;4.2.0 from central in [default]
+	io.unitycatalog#unitycatalog-client;0.4.1 from central in [default]
+	javax.annotation#javax.annotation-api;1.3.2 from central in [default]
+	org.apache.hadoop#hadoop-aws;3.4.2 from central in [default]
+	org.apache.hadoop#hadoop-client-api;3.4.2 from central in [default]
+	org.apache.hadoop#hadoop-client-runtime;3.4.2 from central in [default]
+	org.apache.logging.log4j#log4j-api;2.25.3 from central in [default]
+	org.apache.logging.log4j#log4j-core;2.25.3 from central in [default]
+	org.apache.logging.log4j#log4j-slf4j2-impl;2.25.3 from central in [default]
+	org.apache.parquet#parquet-column;1.16.0 from central in [default]
+	org.apache.parquet#parquet-common;1.16.0 from central in [default]
+	org.apache.parquet#parquet-encoding;1.16.0 from central in [default]
+	org.apache.parquet#parquet-format-structures;1.16.0 from central in [default]
+	org.apache.parquet#parquet-hadoop;1.16.0 from central in [default]
+	org.apache.parquet#parquet-jackson;1.16.0 from central in [default]
+	org.locationtech.jts#jts-core;1.20.0 from central in [default]
+	org.roaringbitmap#RoaringBitmap;0.9.25 from central in [default]
+	org.roaringbitmap#shims;0.9.25 from central in [default]
+	org.slf4j#slf4j-api;2.0.13 from central in [default]
+	org.wildfly.openssl#wildfly-openssl;2.1.4.Final from central in [default]
+	org.xerial.snappy#snappy-java;1.1.10.7 from central in [default]
+	software.amazon.awssdk#bundle;2.29.52 from central in [default]
+	software.amazon.s3.analyticsaccelerator#analyticsaccelerator-s3;1.2.1 from central in [default]
+	:: evicted modules:
+	org.slf4j#slf4j-api;2.0.17 by [org.slf4j#slf4j-api;2.0.13] in [default]
+	org.slf4j#slf4j-api;1.7.36 by [org.slf4j#slf4j-api;2.0.13] in [default]
+	org.slf4j#slf4j-api;1.7.33 by [org.slf4j#slf4j-api;2.0.13] in [default]
+	org.xerial.snappy#snappy-java;1.1.10.4 by [org.xerial.snappy#snappy-java;1.1.10.7] in [default]
+	---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+	|      default     |   40  |   36  |   36  |   4   ||   36  |   36  |
+	---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-eb080010-b4d3-4aa5-87c8-09bb56937009
+	confs: [default]
+	36 artifacts copied, 0 already retrieved (715876kB/2248ms)
+26/06/01 00:24:26 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+26/06/01 00:24:30 INFO SparkContext: Running Spark version 4.1.2
+26/06/01 00:24:30 INFO SparkContext: OS info Linux, 6.6.114.1-microsoft-standard-WSL2, amd64
+26/06/01 00:24:30 INFO SparkContext: Java version 17.0.19+10
+26/06/01 00:24:30 INFO ResourceUtils: ==============================================================
+26/06/01 00:24:30 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/06/01 00:24:30 INFO ResourceUtils: ==============================================================
+26/06/01 00:24:30 INFO SparkContext: Submitted application: resolve-packages
+26/06/01 00:24:30 INFO SecurityManager: Changing view acls to: root
+26/06/01 00:24:30 INFO SecurityManager: Changing modify acls to: root
+26/06/01 00:24:30 INFO SecurityManager: Changing view acls groups to: root
+26/06/01 00:24:30 INFO SecurityManager: Changing modify acls groups to: root
+26/06/01 00:24:30 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: root groups with view permissions: EMPTY; users with modify permissions: root; groups with modify permissions: EMPTY; RPC SSL disabled
+26/06/01 00:24:31 INFO Utils: Successfully started service 'sparkDriver' on port 45969.
+26/06/01 00:24:31 INFO SparkEnv: Registering MapOutputTracker
+26/06/01 00:24:31 INFO SparkEnv: Registering BlockManagerMaster
+26/06/01 00:24:31 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/06/01 00:24:31 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/06/01 00:24:31 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/06/01 00:24:31 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-54c12222-998f-46c0-b494-3b11cd3d8e98
+26/06/01 00:24:31 INFO SparkEnv: Registering OutputCommitCoordinator
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/io.delta_delta-spark_4.1_2.13-4.2.0.jar at spark://7933a2abb16a:45969/jars/io.delta_delta-spark_4.1_2.13-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.4.2.jar at spark://7933a2abb16a:45969/jars/org.apache.hadoop_hadoop-aws-3.4.2.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/io.delta_delta-storage-4.2.0.jar at spark://7933a2abb16a:45969/jars/io.delta_delta-storage-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/io.delta_delta-kernel-api-4.2.0.jar at spark://7933a2abb16a:45969/jars/io.delta_delta-kernel-api-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/io.delta_delta-kernel-defaults-4.2.0.jar at spark://7933a2abb16a:45969/jars/io.delta_delta-kernel-defaults-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/io.delta_delta-kernel-unitycatalog-4.2.0.jar at spark://7933a2abb16a:45969/jars/io.delta_delta-kernel-unitycatalog-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/io.unitycatalog_unitycatalog-client-0.4.1.jar at spark://7933a2abb16a:45969/jars/io.unitycatalog_unitycatalog-client-0.4.1.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.slf4j_slf4j-api-2.0.13.jar at spark://7933a2abb16a:45969/jars/org.slf4j_slf4j-api-2.0.13.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-slf4j2-impl-2.25.3.jar at spark://7933a2abb16a:45969/jars/org.apache.logging.log4j_log4j-slf4j2-impl-2.25.3.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-api-2.25.3.jar at spark://7933a2abb16a:45969/jars/org.apache.logging.log4j_log4j-api-2.25.3.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/com.google.code.findbugs_jsr305-3.0.2.jar at spark://7933a2abb16a:45969/jars/com.google.code.findbugs_jsr305-3.0.2.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-core-2.25.3.jar at spark://7933a2abb16a:45969/jars/org.apache.logging.log4j_log4j-core-2.25.3.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.roaringbitmap_RoaringBitmap-0.9.25.jar at spark://7933a2abb16a:45969/jars/org.roaringbitmap_RoaringBitmap-0.9.25.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-databind-2.13.5.jar at spark://7933a2abb16a:45969/jars/com.fasterxml.jackson.core_jackson-databind-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-core-2.13.5.jar at spark://7933a2abb16a:45969/jars/com.fasterxml.jackson.core_jackson-core-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-annotations-2.13.5.jar at spark://7933a2abb16a:45969/jars/com.fasterxml.jackson.core_jackson-annotations-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.datatype_jackson-datatype-jdk8-2.13.5.jar at spark://7933a2abb16a:45969/jars/com.fasterxml.jackson.datatype_jackson-datatype-jdk8-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.roaringbitmap_shims-0.9.25.jar at spark://7933a2abb16a:45969/jars/org.roaringbitmap_shims-0.9.25.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-client-runtime-3.4.2.jar at spark://7933a2abb16a:45969/jars/org.apache.hadoop_hadoop-client-runtime-3.4.2.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-hadoop-1.16.0.jar at spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-hadoop-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-column-1.16.0.jar at spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-column-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-format-structures-1.16.0.jar at spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-format-structures-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-common-1.16.0.jar at spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-common-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.xerial.snappy_snappy-java-1.1.10.7.jar at spark://7933a2abb16a:45969/jars/org.xerial.snappy_snappy-java-1.1.10.7.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/io.airlift_aircompressor-2.0.2.jar at spark://7933a2abb16a:45969/jars/io.airlift_aircompressor-2.0.2.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/commons-pool_commons-pool-1.6.jar at spark://7933a2abb16a:45969/jars/commons-pool_commons-pool-1.6.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/com.github.luben_zstd-jni-1.5.7-3.jar at spark://7933a2abb16a:45969/jars/com.github.luben_zstd-jni-1.5.7-3.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-encoding-1.16.0.jar at spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-encoding-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.locationtech.jts_jts-core-1.20.0.jar at spark://7933a2abb16a:45969/jars/org.locationtech.jts_jts-core-1.20.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/javax.annotation_javax.annotation-api-1.3.2.jar at spark://7933a2abb16a:45969/jars/javax.annotation_javax.annotation-api-1.3.2.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-client-api-3.4.2.jar at spark://7933a2abb16a:45969/jars/org.apache.hadoop_hadoop-client-api-3.4.2.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/commons-logging_commons-logging-1.3.0.jar at spark://7933a2abb16a:45969/jars/commons-logging_commons-logging-1.3.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-jackson-1.16.0.jar at spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-jackson-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/software.amazon.awssdk_bundle-2.29.52.jar at spark://7933a2abb16a:45969/jars/software.amazon.awssdk_bundle-2.29.52.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/software.amazon.s3.analyticsaccelerator_analyticsaccelerator-s3-1.2.1.jar at spark://7933a2abb16a:45969/jars/software.amazon.s3.analyticsaccelerator_analyticsaccelerator-s3-1.2.1.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added JAR file:///root/.ivy2.5.2/jars/org.wildfly.openssl_wildfly-openssl-2.1.4.Final.jar at spark://7933a2abb16a:45969/jars/org.wildfly.openssl_wildfly-openssl-2.1.4.Final.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/io.delta_delta-spark_4.1_2.13-4.2.0.jar at file:///root/.ivy2.5.2/jars/io.delta_delta-spark_4.1_2.13-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO Utils: Copying /root/.ivy2.5.2/jars/io.delta_delta-spark_4.1_2.13-4.2.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-spark_4.1_2.13-4.2.0.jar
+26/06/01 00:24:31 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.4.2.jar at file:///root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.4.2.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO Utils: Copying /root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.4.2.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.hadoop_hadoop-aws-3.4.2.jar
+26/06/01 00:24:31 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/io.delta_delta-storage-4.2.0.jar at file:///root/.ivy2.5.2/jars/io.delta_delta-storage-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO Utils: Copying /root/.ivy2.5.2/jars/io.delta_delta-storage-4.2.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-storage-4.2.0.jar
+26/06/01 00:24:31 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/io.delta_delta-kernel-api-4.2.0.jar at file:///root/.ivy2.5.2/jars/io.delta_delta-kernel-api-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO Utils: Copying /root/.ivy2.5.2/jars/io.delta_delta-kernel-api-4.2.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-kernel-api-4.2.0.jar
+26/06/01 00:24:31 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/io.delta_delta-kernel-defaults-4.2.0.jar at file:///root/.ivy2.5.2/jars/io.delta_delta-kernel-defaults-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO Utils: Copying /root/.ivy2.5.2/jars/io.delta_delta-kernel-defaults-4.2.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-kernel-defaults-4.2.0.jar
+26/06/01 00:24:31 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/io.delta_delta-kernel-unitycatalog-4.2.0.jar at file:///root/.ivy2.5.2/jars/io.delta_delta-kernel-unitycatalog-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO Utils: Copying /root/.ivy2.5.2/jars/io.delta_delta-kernel-unitycatalog-4.2.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-kernel-unitycatalog-4.2.0.jar
+26/06/01 00:24:31 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/io.unitycatalog_unitycatalog-client-0.4.1.jar at file:///root/.ivy2.5.2/jars/io.unitycatalog_unitycatalog-client-0.4.1.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO Utils: Copying /root/.ivy2.5.2/jars/io.unitycatalog_unitycatalog-client-0.4.1.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.unitycatalog_unitycatalog-client-0.4.1.jar
+26/06/01 00:24:31 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.slf4j_slf4j-api-2.0.13.jar at file:///root/.ivy2.5.2/jars/org.slf4j_slf4j-api-2.0.13.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO Utils: Copying /root/.ivy2.5.2/jars/org.slf4j_slf4j-api-2.0.13.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.slf4j_slf4j-api-2.0.13.jar
+26/06/01 00:24:31 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-slf4j2-impl-2.25.3.jar at file:///root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-slf4j2-impl-2.25.3.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO Utils: Copying /root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-slf4j2-impl-2.25.3.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.logging.log4j_log4j-slf4j2-impl-2.25.3.jar
+26/06/01 00:24:31 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-api-2.25.3.jar at file:///root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-api-2.25.3.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO Utils: Copying /root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-api-2.25.3.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.logging.log4j_log4j-api-2.25.3.jar
+26/06/01 00:24:31 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/com.google.code.findbugs_jsr305-3.0.2.jar at file:///root/.ivy2.5.2/jars/com.google.code.findbugs_jsr305-3.0.2.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO Utils: Copying /root/.ivy2.5.2/jars/com.google.code.findbugs_jsr305-3.0.2.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.google.code.findbugs_jsr305-3.0.2.jar
+26/06/01 00:24:31 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-core-2.25.3.jar at file:///root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-core-2.25.3.jar with timestamp 1780273470113
+26/06/01 00:24:31 INFO Utils: Copying /root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-core-2.25.3.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.logging.log4j_log4j-core-2.25.3.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.roaringbitmap_RoaringBitmap-0.9.25.jar at file:///root/.ivy2.5.2/jars/org.roaringbitmap_RoaringBitmap-0.9.25.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/org.roaringbitmap_RoaringBitmap-0.9.25.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.roaringbitmap_RoaringBitmap-0.9.25.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-databind-2.13.5.jar at file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-databind-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-databind-2.13.5.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.core_jackson-databind-2.13.5.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-core-2.13.5.jar at file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-core-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-core-2.13.5.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.core_jackson-core-2.13.5.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-annotations-2.13.5.jar at file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-annotations-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-annotations-2.13.5.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.core_jackson-annotations-2.13.5.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.datatype_jackson-datatype-jdk8-2.13.5.jar at file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.datatype_jackson-datatype-jdk8-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/com.fasterxml.jackson.datatype_jackson-datatype-jdk8-2.13.5.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.datatype_jackson-datatype-jdk8-2.13.5.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.roaringbitmap_shims-0.9.25.jar at file:///root/.ivy2.5.2/jars/org.roaringbitmap_shims-0.9.25.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/org.roaringbitmap_shims-0.9.25.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.roaringbitmap_shims-0.9.25.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-client-runtime-3.4.2.jar at file:///root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-client-runtime-3.4.2.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-client-runtime-3.4.2.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.hadoop_hadoop-client-runtime-3.4.2.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-hadoop-1.16.0.jar at file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-hadoop-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/org.apache.parquet_parquet-hadoop-1.16.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-hadoop-1.16.0.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-column-1.16.0.jar at file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-column-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/org.apache.parquet_parquet-column-1.16.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-column-1.16.0.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-format-structures-1.16.0.jar at file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-format-structures-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/org.apache.parquet_parquet-format-structures-1.16.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-format-structures-1.16.0.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-common-1.16.0.jar at file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-common-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/org.apache.parquet_parquet-common-1.16.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-common-1.16.0.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.xerial.snappy_snappy-java-1.1.10.7.jar at file:///root/.ivy2.5.2/jars/org.xerial.snappy_snappy-java-1.1.10.7.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/org.xerial.snappy_snappy-java-1.1.10.7.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.xerial.snappy_snappy-java-1.1.10.7.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/io.airlift_aircompressor-2.0.2.jar at file:///root/.ivy2.5.2/jars/io.airlift_aircompressor-2.0.2.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/io.airlift_aircompressor-2.0.2.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.airlift_aircompressor-2.0.2.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/commons-pool_commons-pool-1.6.jar at file:///root/.ivy2.5.2/jars/commons-pool_commons-pool-1.6.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/commons-pool_commons-pool-1.6.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/commons-pool_commons-pool-1.6.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/com.github.luben_zstd-jni-1.5.7-3.jar at file:///root/.ivy2.5.2/jars/com.github.luben_zstd-jni-1.5.7-3.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/com.github.luben_zstd-jni-1.5.7-3.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.github.luben_zstd-jni-1.5.7-3.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-encoding-1.16.0.jar at file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-encoding-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/org.apache.parquet_parquet-encoding-1.16.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-encoding-1.16.0.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.locationtech.jts_jts-core-1.20.0.jar at file:///root/.ivy2.5.2/jars/org.locationtech.jts_jts-core-1.20.0.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/org.locationtech.jts_jts-core-1.20.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.locationtech.jts_jts-core-1.20.0.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/javax.annotation_javax.annotation-api-1.3.2.jar at file:///root/.ivy2.5.2/jars/javax.annotation_javax.annotation-api-1.3.2.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/javax.annotation_javax.annotation-api-1.3.2.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/javax.annotation_javax.annotation-api-1.3.2.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-client-api-3.4.2.jar at file:///root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-client-api-3.4.2.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-client-api-3.4.2.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.hadoop_hadoop-client-api-3.4.2.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/commons-logging_commons-logging-1.3.0.jar at file:///root/.ivy2.5.2/jars/commons-logging_commons-logging-1.3.0.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/commons-logging_commons-logging-1.3.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/commons-logging_commons-logging-1.3.0.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-jackson-1.16.0.jar at file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-jackson-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/org.apache.parquet_parquet-jackson-1.16.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-jackson-1.16.0.jar
+26/06/01 00:24:32 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/software.amazon.awssdk_bundle-2.29.52.jar at file:///root/.ivy2.5.2/jars/software.amazon.awssdk_bundle-2.29.52.jar with timestamp 1780273470113
+26/06/01 00:24:32 INFO Utils: Copying /root/.ivy2.5.2/jars/software.amazon.awssdk_bundle-2.29.52.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/software.amazon.awssdk_bundle-2.29.52.jar
+26/06/01 00:24:34 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/software.amazon.s3.analyticsaccelerator_analyticsaccelerator-s3-1.2.1.jar at file:///root/.ivy2.5.2/jars/software.amazon.s3.analyticsaccelerator_analyticsaccelerator-s3-1.2.1.jar with timestamp 1780273470113
+26/06/01 00:24:34 INFO Utils: Copying /root/.ivy2.5.2/jars/software.amazon.s3.analyticsaccelerator_analyticsaccelerator-s3-1.2.1.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/software.amazon.s3.analyticsaccelerator_analyticsaccelerator-s3-1.2.1.jar
+26/06/01 00:24:34 INFO SparkContext: Added file file:///root/.ivy2.5.2/jars/org.wildfly.openssl_wildfly-openssl-2.1.4.Final.jar at file:///root/.ivy2.5.2/jars/org.wildfly.openssl_wildfly-openssl-2.1.4.Final.jar with timestamp 1780273470113
+26/06/01 00:24:34 INFO Utils: Copying /root/.ivy2.5.2/jars/org.wildfly.openssl_wildfly-openssl-2.1.4.Final.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.wildfly.openssl_wildfly-openssl-2.1.4.Final.jar
+26/06/01 00:24:35 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/06/01 00:24:35 INFO ResourceProfile: Limiting resource is cpu
+26/06/01 00:24:35 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/06/01 00:24:35 INFO SecurityManager: Changing view acls to: root
+26/06/01 00:24:35 INFO SecurityManager: Changing modify acls to: root
+26/06/01 00:24:35 INFO SecurityManager: Changing view acls groups to: root
+26/06/01 00:24:35 INFO SecurityManager: Changing modify acls groups to: root
+26/06/01 00:24:35 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: root groups with view permissions: EMPTY; users with modify permissions: root; groups with modify permissions: EMPTY; RPC SSL disabled
+26/06/01 00:24:36 INFO Executor: Starting executor ID driver on host 7933a2abb16a
+26/06/01 00:24:36 INFO Executor: OS info Linux, 6.6.114.1-microsoft-standard-WSL2, amd64
+26/06/01 00:24:36 INFO Executor: Java version 17.0.19+10
+26/06/01 00:24:36 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+26/06/01 00:24:36 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@2add3c71 for default.
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-core-2.25.3.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-core-2.25.3.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.logging.log4j_log4j-core-2.25.3.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/io.delta_delta-kernel-api-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/io.delta_delta-kernel-api-4.2.0.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-kernel-api-4.2.0.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.roaringbitmap_shims-0.9.25.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/org.roaringbitmap_shims-0.9.25.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.roaringbitmap_shims-0.9.25.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/javax.annotation_javax.annotation-api-1.3.2.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/javax.annotation_javax.annotation-api-1.3.2.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/javax.annotation_javax.annotation-api-1.3.2.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/io.delta_delta-kernel-defaults-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/io.delta_delta-kernel-defaults-4.2.0.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-kernel-defaults-4.2.0.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-slf4j2-impl-2.25.3.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-slf4j2-impl-2.25.3.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.logging.log4j_log4j-slf4j2-impl-2.25.3.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-databind-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-databind-2.13.5.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.core_jackson-databind-2.13.5.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.4.2.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-aws-3.4.2.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.hadoop_hadoop-aws-3.4.2.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/io.airlift_aircompressor-2.0.2.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/io.airlift_aircompressor-2.0.2.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.airlift_aircompressor-2.0.2.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-encoding-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/org.apache.parquet_parquet-encoding-1.16.0.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-encoding-1.16.0.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/io.unitycatalog_unitycatalog-client-0.4.1.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/io.unitycatalog_unitycatalog-client-0.4.1.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.unitycatalog_unitycatalog-client-0.4.1.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/commons-logging_commons-logging-1.3.0.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/commons-logging_commons-logging-1.3.0.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/commons-logging_commons-logging-1.3.0.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-format-structures-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/org.apache.parquet_parquet-format-structures-1.16.0.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-format-structures-1.16.0.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-client-runtime-3.4.2.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-client-runtime-3.4.2.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.hadoop_hadoop-client-runtime-3.4.2.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-common-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/org.apache.parquet_parquet-common-1.16.0.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-common-1.16.0.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/io.delta_delta-kernel-unitycatalog-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/io.delta_delta-kernel-unitycatalog-4.2.0.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-kernel-unitycatalog-4.2.0.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/software.amazon.s3.analyticsaccelerator_analyticsaccelerator-s3-1.2.1.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/software.amazon.s3.analyticsaccelerator_analyticsaccelerator-s3-1.2.1.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/software.amazon.s3.analyticsaccelerator_analyticsaccelerator-s3-1.2.1.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.wildfly.openssl_wildfly-openssl-2.1.4.Final.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/org.wildfly.openssl_wildfly-openssl-2.1.4.Final.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.wildfly.openssl_wildfly-openssl-2.1.4.Final.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/io.delta_delta-storage-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/io.delta_delta-storage-4.2.0.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-storage-4.2.0.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-hadoop-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/org.apache.parquet_parquet-hadoop-1.16.0.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-hadoop-1.16.0.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-column-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/org.apache.parquet_parquet-column-1.16.0.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-column-1.16.0.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-annotations-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-annotations-2.13.5.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.core_jackson-annotations-2.13.5.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.datatype_jackson-datatype-jdk8-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/com.fasterxml.jackson.datatype_jackson-datatype-jdk8-2.13.5.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.datatype_jackson-datatype-jdk8-2.13.5.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.apache.parquet_parquet-jackson-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:36 INFO Utils: /root/.ivy2.5.2/jars/org.apache.parquet_parquet-jackson-1.16.0.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-jackson-1.16.0.jar
+26/06/01 00:24:36 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/software.amazon.awssdk_bundle-2.29.52.jar with timestamp 1780273470113
+26/06/01 00:24:37 INFO Utils: /root/.ivy2.5.2/jars/software.amazon.awssdk_bundle-2.29.52.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/software.amazon.awssdk_bundle-2.29.52.jar
+26/06/01 00:24:37 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/com.github.luben_zstd-jni-1.5.7-3.jar with timestamp 1780273470113
+26/06/01 00:24:37 INFO Utils: /root/.ivy2.5.2/jars/com.github.luben_zstd-jni-1.5.7-3.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.github.luben_zstd-jni-1.5.7-3.jar
+26/06/01 00:24:37 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/commons-pool_commons-pool-1.6.jar with timestamp 1780273470113
+26/06/01 00:24:37 INFO Utils: /root/.ivy2.5.2/jars/commons-pool_commons-pool-1.6.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/commons-pool_commons-pool-1.6.jar
+26/06/01 00:24:37 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.roaringbitmap_RoaringBitmap-0.9.25.jar with timestamp 1780273470113
+26/06/01 00:24:37 INFO Utils: /root/.ivy2.5.2/jars/org.roaringbitmap_RoaringBitmap-0.9.25.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.roaringbitmap_RoaringBitmap-0.9.25.jar
+26/06/01 00:24:37 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-core-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:37 INFO Utils: /root/.ivy2.5.2/jars/com.fasterxml.jackson.core_jackson-core-2.13.5.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.core_jackson-core-2.13.5.jar
+26/06/01 00:24:38 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.xerial.snappy_snappy-java-1.1.10.7.jar with timestamp 1780273470113
+26/06/01 00:24:38 INFO Utils: /root/.ivy2.5.2/jars/org.xerial.snappy_snappy-java-1.1.10.7.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.xerial.snappy_snappy-java-1.1.10.7.jar
+26/06/01 00:24:38 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/com.google.code.findbugs_jsr305-3.0.2.jar with timestamp 1780273470113
+26/06/01 00:24:38 INFO Utils: /root/.ivy2.5.2/jars/com.google.code.findbugs_jsr305-3.0.2.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.google.code.findbugs_jsr305-3.0.2.jar
+26/06/01 00:24:38 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.slf4j_slf4j-api-2.0.13.jar with timestamp 1780273470113
+26/06/01 00:24:38 INFO Utils: /root/.ivy2.5.2/jars/org.slf4j_slf4j-api-2.0.13.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.slf4j_slf4j-api-2.0.13.jar
+26/06/01 00:24:38 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/io.delta_delta-spark_4.1_2.13-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:38 INFO Utils: /root/.ivy2.5.2/jars/io.delta_delta-spark_4.1_2.13-4.2.0.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-spark_4.1_2.13-4.2.0.jar
+26/06/01 00:24:38 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-api-2.25.3.jar with timestamp 1780273470113
+26/06/01 00:24:38 INFO Utils: /root/.ivy2.5.2/jars/org.apache.logging.log4j_log4j-api-2.25.3.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.logging.log4j_log4j-api-2.25.3.jar
+26/06/01 00:24:38 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-client-api-3.4.2.jar with timestamp 1780273470113
+26/06/01 00:24:38 INFO Utils: /root/.ivy2.5.2/jars/org.apache.hadoop_hadoop-client-api-3.4.2.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.hadoop_hadoop-client-api-3.4.2.jar
+26/06/01 00:24:38 INFO Executor: Fetching file:///root/.ivy2.5.2/jars/org.locationtech.jts_jts-core-1.20.0.jar with timestamp 1780273470113
+26/06/01 00:24:38 INFO Utils: /root/.ivy2.5.2/jars/org.locationtech.jts_jts-core-1.20.0.jar has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.locationtech.jts_jts-core-1.20.0.jar
+26/06/01 00:24:38 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.wildfly.openssl_wildfly-openssl-2.1.4.Final.jar with timestamp 1780273470113
+26/06/01 00:24:38 INFO TransportClientFactory: Successfully created connection to 7933a2abb16a/172.17.0.2:45969 after 217 ms (0 ms spent in bootstraps)
+26/06/01 00:24:38 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.wildfly.openssl_wildfly-openssl-2.1.4.Final.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp11442194996277482306.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp11442194996277482306.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.wildfly.openssl_wildfly-openssl-2.1.4.Final.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.wildfly.openssl_wildfly-openssl-2.1.4.Final.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/io.delta_delta-kernel-defaults-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/io.delta_delta-kernel-defaults-4.2.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp8726349085415434691.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp8726349085415434691.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-kernel-defaults-4.2.0.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-kernel-defaults-4.2.0.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/io.unitycatalog_unitycatalog-client-0.4.1.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/io.unitycatalog_unitycatalog-client-0.4.1.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp15358988152478011433.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp15358988152478011433.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.unitycatalog_unitycatalog-client-0.4.1.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.unitycatalog_unitycatalog-client-0.4.1.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/com.fasterxml.jackson.core_jackson-annotations-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/com.fasterxml.jackson.core_jackson-annotations-2.13.5.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp4544752860099472289.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp4544752860099472289.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.core_jackson-annotations-2.13.5.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.core_jackson-annotations-2.13.5.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.xerial.snappy_snappy-java-1.1.10.7.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.xerial.snappy_snappy-java-1.1.10.7.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp16806006868863372782.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp16806006868863372782.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.xerial.snappy_snappy-java-1.1.10.7.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.xerial.snappy_snappy-java-1.1.10.7.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/io.delta_delta-kernel-api-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/io.delta_delta-kernel-api-4.2.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp11517973427854735430.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp11517973427854735430.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-kernel-api-4.2.0.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-kernel-api-4.2.0.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-format-structures-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-format-structures-1.16.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp8740339680250490925.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp8740339680250490925.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-format-structures-1.16.0.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-format-structures-1.16.0.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.apache.logging.log4j_log4j-slf4j2-impl-2.25.3.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.apache.logging.log4j_log4j-slf4j2-impl-2.25.3.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp6511839011828448314.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp6511839011828448314.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.logging.log4j_log4j-slf4j2-impl-2.25.3.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.logging.log4j_log4j-slf4j2-impl-2.25.3.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/com.google.code.findbugs_jsr305-3.0.2.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/com.google.code.findbugs_jsr305-3.0.2.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp8432289788983282371.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp8432289788983282371.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.google.code.findbugs_jsr305-3.0.2.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.google.code.findbugs_jsr305-3.0.2.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/com.fasterxml.jackson.core_jackson-databind-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/com.fasterxml.jackson.core_jackson-databind-2.13.5.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp6919658094589362859.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp6919658094589362859.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.core_jackson-databind-2.13.5.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.core_jackson-databind-2.13.5.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/com.fasterxml.jackson.datatype_jackson-datatype-jdk8-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/com.fasterxml.jackson.datatype_jackson-datatype-jdk8-2.13.5.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp3863133938159987838.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp3863133938159987838.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.datatype_jackson-datatype-jdk8-2.13.5.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.datatype_jackson-datatype-jdk8-2.13.5.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/io.delta_delta-spark_4.1_2.13-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/io.delta_delta-spark_4.1_2.13-4.2.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp9178522612247389272.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp9178522612247389272.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-spark_4.1_2.13-4.2.0.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-spark_4.1_2.13-4.2.0.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.roaringbitmap_shims-0.9.25.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.roaringbitmap_shims-0.9.25.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp8740393697042560652.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp8740393697042560652.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.roaringbitmap_shims-0.9.25.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.roaringbitmap_shims-0.9.25.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.apache.hadoop_hadoop-aws-3.4.2.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.apache.hadoop_hadoop-aws-3.4.2.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp2162643581292037946.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp2162643581292037946.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.hadoop_hadoop-aws-3.4.2.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.hadoop_hadoop-aws-3.4.2.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/software.amazon.s3.analyticsaccelerator_analyticsaccelerator-s3-1.2.1.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/software.amazon.s3.analyticsaccelerator_analyticsaccelerator-s3-1.2.1.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp10942567685303363846.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp10942567685303363846.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/software.amazon.s3.analyticsaccelerator_analyticsaccelerator-s3-1.2.1.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/software.amazon.s3.analyticsaccelerator_analyticsaccelerator-s3-1.2.1.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-hadoop-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-hadoop-1.16.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp12746842257081372177.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp12746842257081372177.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-hadoop-1.16.0.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-hadoop-1.16.0.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-column-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-column-1.16.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp2912782859260368390.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp2912782859260368390.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-column-1.16.0.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-column-1.16.0.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/io.delta_delta-kernel-unitycatalog-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/io.delta_delta-kernel-unitycatalog-4.2.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp12887358830243080989.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp12887358830243080989.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-kernel-unitycatalog-4.2.0.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-kernel-unitycatalog-4.2.0.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-encoding-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-encoding-1.16.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp9113625171737470070.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp9113625171737470070.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-encoding-1.16.0.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-encoding-1.16.0.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/io.delta_delta-storage-4.2.0.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/io.delta_delta-storage-4.2.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp13785264155373071839.tmp
+26/06/01 00:24:39 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp13785264155373071839.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-storage-4.2.0.jar
+26/06/01 00:24:39 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.delta_delta-storage-4.2.0.jar to class loader default
+26/06/01 00:24:39 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.apache.hadoop_hadoop-client-runtime-3.4.2.jar with timestamp 1780273470113
+26/06/01 00:24:39 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.apache.hadoop_hadoop-client-runtime-3.4.2.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp14048478958720122342.tmp
+26/06/01 00:24:40 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp14048478958720122342.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.hadoop_hadoop-client-runtime-3.4.2.jar
+26/06/01 00:24:42 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.hadoop_hadoop-client-runtime-3.4.2.jar to class loader default
+26/06/01 00:24:42 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/com.github.luben_zstd-jni-1.5.7-3.jar with timestamp 1780273470113
+26/06/01 00:24:42 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/com.github.luben_zstd-jni-1.5.7-3.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp105903025305701735.tmp
+26/06/01 00:24:42 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp105903025305701735.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.github.luben_zstd-jni-1.5.7-3.jar
+26/06/01 00:24:42 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.github.luben_zstd-jni-1.5.7-3.jar to class loader default
+26/06/01 00:24:42 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/commons-logging_commons-logging-1.3.0.jar with timestamp 1780273470113
+26/06/01 00:24:42 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/commons-logging_commons-logging-1.3.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp14424626558810156583.tmp
+26/06/01 00:24:42 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp14424626558810156583.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/commons-logging_commons-logging-1.3.0.jar
+26/06/01 00:24:42 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/commons-logging_commons-logging-1.3.0.jar to class loader default
+26/06/01 00:24:42 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/io.airlift_aircompressor-2.0.2.jar with timestamp 1780273470113
+26/06/01 00:24:42 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/io.airlift_aircompressor-2.0.2.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp13806976959967837751.tmp
+26/06/01 00:24:42 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp13806976959967837751.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.airlift_aircompressor-2.0.2.jar
+26/06/01 00:24:42 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/io.airlift_aircompressor-2.0.2.jar to class loader default
+26/06/01 00:24:42 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-common-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:42 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-common-1.16.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp8470512815875200156.tmp
+26/06/01 00:24:42 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp8470512815875200156.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-common-1.16.0.jar
+26/06/01 00:24:42 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-common-1.16.0.jar to class loader default
+26/06/01 00:24:42 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.apache.hadoop_hadoop-client-api-3.4.2.jar with timestamp 1780273470113
+26/06/01 00:24:42 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.apache.hadoop_hadoop-client-api-3.4.2.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp18307183767969032572.tmp
+26/06/01 00:24:42 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp18307183767969032572.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.hadoop_hadoop-client-api-3.4.2.jar
+26/06/01 00:24:43 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.hadoop_hadoop-client-api-3.4.2.jar to class loader default
+26/06/01 00:24:43 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/javax.annotation_javax.annotation-api-1.3.2.jar with timestamp 1780273470113
+26/06/01 00:24:43 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/javax.annotation_javax.annotation-api-1.3.2.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp13586423052657961832.tmp
+26/06/01 00:24:43 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp13586423052657961832.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/javax.annotation_javax.annotation-api-1.3.2.jar
+26/06/01 00:24:43 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/javax.annotation_javax.annotation-api-1.3.2.jar to class loader default
+26/06/01 00:24:43 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-jackson-1.16.0.jar with timestamp 1780273470113
+26/06/01 00:24:43 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.apache.parquet_parquet-jackson-1.16.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp9663406506603999174.tmp
+26/06/01 00:24:43 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp9663406506603999174.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-jackson-1.16.0.jar
+26/06/01 00:24:43 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.parquet_parquet-jackson-1.16.0.jar to class loader default
+26/06/01 00:24:43 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.roaringbitmap_RoaringBitmap-0.9.25.jar with timestamp 1780273470113
+26/06/01 00:24:43 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.roaringbitmap_RoaringBitmap-0.9.25.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp2568429807951656347.tmp
+26/06/01 00:24:43 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp2568429807951656347.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.roaringbitmap_RoaringBitmap-0.9.25.jar
+26/06/01 00:24:43 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.roaringbitmap_RoaringBitmap-0.9.25.jar to class loader default
+26/06/01 00:24:43 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.slf4j_slf4j-api-2.0.13.jar with timestamp 1780273470113
+26/06/01 00:24:43 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.slf4j_slf4j-api-2.0.13.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp7138625685869504222.tmp
+26/06/01 00:24:43 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp7138625685869504222.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.slf4j_slf4j-api-2.0.13.jar
+26/06/01 00:24:43 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.slf4j_slf4j-api-2.0.13.jar to class loader default
+26/06/01 00:24:43 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.apache.logging.log4j_log4j-core-2.25.3.jar with timestamp 1780273470113
+26/06/01 00:24:43 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.apache.logging.log4j_log4j-core-2.25.3.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp13507229884612853643.tmp
+26/06/01 00:24:43 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp13507229884612853643.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.logging.log4j_log4j-core-2.25.3.jar
+26/06/01 00:24:43 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.logging.log4j_log4j-core-2.25.3.jar to class loader default
+26/06/01 00:24:43 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/com.fasterxml.jackson.core_jackson-core-2.13.5.jar with timestamp 1780273470113
+26/06/01 00:24:43 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/com.fasterxml.jackson.core_jackson-core-2.13.5.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp14669099329274736888.tmp
+26/06/01 00:24:43 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp14669099329274736888.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.core_jackson-core-2.13.5.jar
+26/06/01 00:24:43 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/com.fasterxml.jackson.core_jackson-core-2.13.5.jar to class loader default
+26/06/01 00:24:43 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.apache.logging.log4j_log4j-api-2.25.3.jar with timestamp 1780273470113
+26/06/01 00:24:43 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.apache.logging.log4j_log4j-api-2.25.3.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp2703281502427686423.tmp
+26/06/01 00:24:43 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp2703281502427686423.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.logging.log4j_log4j-api-2.25.3.jar
+26/06/01 00:24:43 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.apache.logging.log4j_log4j-api-2.25.3.jar to class loader default
+26/06/01 00:24:43 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/software.amazon.awssdk_bundle-2.29.52.jar with timestamp 1780273470113
+26/06/01 00:24:43 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/software.amazon.awssdk_bundle-2.29.52.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp4493421672892287291.tmp
+26/06/01 00:24:48 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp4493421672892287291.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/software.amazon.awssdk_bundle-2.29.52.jar
+26/06/01 00:24:50 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/software.amazon.awssdk_bundle-2.29.52.jar to class loader default
+26/06/01 00:24:50 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/org.locationtech.jts_jts-core-1.20.0.jar with timestamp 1780273470113
+26/06/01 00:24:50 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/org.locationtech.jts_jts-core-1.20.0.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp2968917706640825136.tmp
+26/06/01 00:24:50 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp2968917706640825136.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.locationtech.jts_jts-core-1.20.0.jar
+26/06/01 00:24:50 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/org.locationtech.jts_jts-core-1.20.0.jar to class loader default
+26/06/01 00:24:50 INFO Executor: Fetching spark://7933a2abb16a:45969/jars/commons-pool_commons-pool-1.6.jar with timestamp 1780273470113
+26/06/01 00:24:50 INFO Utils: Fetching spark://7933a2abb16a:45969/jars/commons-pool_commons-pool-1.6.jar to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp15437210930957333979.tmp
+26/06/01 00:24:50 INFO Utils: /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/fetchFileTemp15437210930957333979.tmp has been previously copied to /tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/commons-pool_commons-pool-1.6.jar
+26/06/01 00:24:50 INFO Executor: Adding file:/tmp/spark-bf93300d-1e31-4e18-9b7b-5a3a0b4eea70/userFiles-4195926b-5066-4a34-93ff-f081530f3972/commons-pool_commons-pool-1.6.jar to class loader default
+26/06/01 00:24:50 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 37273.
+26/06/01 00:24:50 INFO NettyBlockTransferService: Server created on 7933a2abb16a:37273
+26/06/01 00:24:50 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/06/01 00:24:50 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 7933a2abb16a, 37273, None)
+26/06/01 00:24:50 INFO BlockManagerMasterEndpoint: Registering block manager 7933a2abb16a:37273 with 434.4 MiB RAM, BlockManagerId(driver, 7933a2abb16a, 37273, None)
+26/06/01 00:24:50 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 7933a2abb16a, 37273, None)
+26/06/01 00:24:50 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 7933a2abb16a, 37273, None)
+26/06/01 00:24:55 INFO SparkContext: SparkContext is stopping with exitCode 0 from stop at NativeMethodAccessorImpl.java:0.
+26/06/01 00:24:55 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+26/06/01 00:24:56 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+26/06/01 00:24:56 INFO MemoryStore: MemoryStore cleared
+26/06/01 00:24:56 INFO BlockManager: BlockManager stopped
+26/06/01 00:24:56 INFO BlockManagerMaster: BlockManagerMaster stopped
+26/06/01 00:24:56 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+26/06/01 00:24:56 INFO SparkContext: Successfully stopped SparkContext (Uptime: 26153 ms)
+cp: target '/resolved-jars/' is not a directory
+make: *** [Makefile:18: bootstrap] Error 1

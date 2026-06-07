@@ -1,21 +1,13 @@
 """
 apexlib — funcoes compartilhadas para ler e analisar event logs do Spark (reais ou sinteticos).
 
-Concentra aqui o que o Watcher e o Oraculo precisam, para nao duplicar logica nem
-divergir. Cada funcao resolve uma das fragilidades que apareceram no run real:
-
-- read_events       : auto-descomprime zstd (o MinIO/plat-v0 entrega comprimido) e nao
-                      derruba o pipeline numa linha corrompida.  [resiliencia]
-- validate_schema   : avisa se o event log nao tem a estrutura esperada do Spark. [resiliencia]
-- join_operator     : le o plano FINAL pos-AQE quando existe, nao o inicial.       [correcao]
-- hottest_reduce_stage : isola o stage de reduce do join, em vez de misturar tasks
-                      de scan (que leem 0) com as de reduce.                        [correcao]
-- skew_metrics      : trata 1 task (colapso AQE) explicitamente, sem hack de /0.    [correcao]
+Inclui suporte a scenario_hash para cadeia de custodia (v4).
 """
 import json
 import shutil
 import subprocess
 import statistics
+import hashlib
 from collections import defaultdict
 
 ZSTD_MAGIC = b"\x28\xb5\x2f\xfd"
@@ -36,7 +28,7 @@ def read_events(path):
         try:
             events.append(json.loads(line))
         except json.JSONDecodeError:
-            continue  # uma linha quebrada nao invalida o log inteiro
+            continue
     return events
 
 
@@ -123,10 +115,38 @@ def skew_metrics(records):
     n = len(records)
     hot = max(records)
     if n == 1:
-        # Uma unica task leu todo o shuffle do stage: ou o AQE coalesceu as particoes,
-        # ou ha concentracao total numa chave. Nao da para comparar contra pares.
         return {"hot": hot, "median_cold": 0, "ratio": float("inf"), "n_tasks": 1, "collapsed": True}
     cold = [r for r in records if r != hot]
     median_cold = statistics.median(cold) if cold else hot
     ratio = round(hot / median_cold, 1) if median_cold else float("inf")
     return {"hot": hot, "median_cold": median_cold, "ratio": ratio, "n_tasks": n, "collapsed": False}
+
+
+# ======================== SCENARIO HASH (PROVENIÊNCIA) ========================
+
+def compute_scenario_hash(scenario_path: str) -> str:
+    """
+    Calcula sha256 do scenario.yaml, retorna 'sha256:primeiros16hex'.
+    Usado por code_generator, plan_generator e watchers para validação.
+    """
+    with open(scenario_path, "rb") as f:
+        h = hashlib.sha256(f.read()).hexdigest()[:16]
+    return f"sha256:{h}"
+
+
+def validate_provenance(events, scenario_path: str) -> None:
+    """
+    Verifica se o log sintético foi gerado com o mesmo scenario atual.
+    Se for log real (sem evento ApexSyntheticProvenance), apenas retorna.
+    Se o hash divergir, levanta ValueError com detalhes.
+    """
+    prov = next((e for e in events if e.get("Event") == "ApexSyntheticProvenance"), None)
+    if prov is None:
+        return  # log real ou sintético antigo (sem proveniência)
+    current_hash = compute_scenario_hash(scenario_path)
+    if prov["scenario_hash"] != current_hash:
+        raise ValueError(
+            f"Proveniência inválida: log sintético gerado com scenario hash {prov['scenario_hash']}, "
+            f"mas o scenario atual tem hash {current_hash}. "
+            f"Regenere o log sintético com 'plan_generator'."
+        )

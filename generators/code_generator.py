@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """
-Gerador de codigo (v3) — sentinela em vez de linha absoluta no contrato.
-
-Mudanca vs v2: a linha do anti-pattern deixou de ser um INPUT fragil no scenario (que
-quebrava o guard a cada mudanca de config). Agora e um OUTPUT derivado:
-- o template marca o anti-pattern com um comentario-sentinela `# APEX::ANTIPATTERN`;
-- o gerador acha a linha do sentinela apos renderizar (sempre correta por construcao);
-- grava num manifesto `<job>.meta.json` (a coordenada que o CodeGrounder usa na Lane 2);
-- se o scenario declarar uma linha esperada, AVISA na divergencia (nao derruba o build).
+Gerador de codigo (v4) — adiciona scenario_hash ao manifesto (cadeia de custodia).
 """
 import sys
 import json
+import hashlib
 import yaml
 
 SENTINEL = "# APEX::ANTIPATTERN"
+
+
+def compute_scenario_hash(scenario_path: str) -> str:
+    with open(scenario_path, "rb") as f:
+        h = hashlib.sha256(f.read()).hexdigest()[:16]
+    return f"sha256:{h}"
 
 
 def build_job_source(config):
@@ -23,7 +23,7 @@ def build_job_source(config):
     conf = cfg.get("spark_config", {})
     conf_lines = "".join(f'    .config("{k}", "{v}")\n' for k, v in conf.items())
 
-    header = f'''# Auto-gerado por code_generator v3 — scenario: {sid}
+    header = f'''# Auto-gerado por code_generator v4 — scenario: {sid}
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, rand, when
 
@@ -50,16 +50,18 @@ spark.stop()
 def generate_job(scenario_path, output_path):
     config = yaml.safe_load(open(scenario_path))
     source, actual_line = build_job_source(config)
+    scenario_hash = compute_scenario_hash(scenario_path)
 
     with open(output_path, "w") as f:
         f.write(source)
 
-    # A linha e um OUTPUT derivado -> manifesto (usado na correlacao codigo<->log, Lane 2).
     manifest = {
         "scenario_id": config["scenario_id"],
+        "scenario_hash": scenario_hash,
         "job_file": output_path,
         "anti_pattern_line": actual_line,
         "anti_pattern_class": config["anti_pattern"]["class"],
+        "generator_version": "v4",
     }
     meta_path = output_path.rsplit(".", 1)[0] + ".meta.json"
     with open(meta_path, "w") as f:

@@ -1,0 +1,6 @@
+{
+  "scenario_id": "skew_on_join_30x",
+  "job_file": "job_demo.py",
+  "anti_pattern_line": 20,
+  "anti_pattern_class": "data_skew_on_join_key"
+}

@@ -1,13 +1,6 @@
 #!/usr/bin/env python3
 """
-Skew Watcher (v3) — endurecido.
-
-Mudancas vs v2 (que tinha band-aids):
-- Usa apexlib: isola o stage de reduce do join (nao mistura tasks de scan que leem 0).
-- Le o plano FINAL pos-AQE.
-- Trata o caso de 1 task (colapso do AQE) explicitamente, com mensagem honesta,
-  em vez do hack `or [1]` que produzia um ratio sem sentido.
-- Auto-descomprime logs zstd e valida o schema antes de analisar.
+Skew Watcher (v4) — adiciona validacao de proveniencia (scenario_hash).
 """
 import sys
 import json
@@ -40,9 +33,7 @@ def build_finding(scenario, events):
         )
         ratio_txt = f"{m['ratio']}x"
 
-    # Skew confirmado se: operador certo E (colapso OU ratio acima do minimo declarado).
     is_skew = op == sig["join_operator"] and (m["collapsed"] or m["ratio"] >= sig["skew_ratio_min"])
-    # Confianca derivada da evidencia (nunca auto-avaliada arbitrariamente).
     if m["collapsed"]:
         confidence = 0.95
     elif m["ratio"] == float("inf"):
@@ -80,6 +71,13 @@ def check_acceptance(finding, scenario):
 def main(scenario_path, log_path):
     scenario = yaml.safe_load(open(scenario_path))
     events = apexlib.read_events(log_path)
+
+    # Valida proveniencia (se for sintético, verifica hash)
+    try:
+        apexlib.validate_provenance(events, scenario_path)
+    except ValueError as e:
+        print(f"❌ {e}", file=sys.stderr)
+        sys.exit(1)
 
     for w in apexlib.validate_schema(events):
         print(f"⚠️  schema: {w}", file=sys.stderr)
