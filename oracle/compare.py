@@ -1,16 +1,12 @@
 #!/usr/bin/env python3
 """
-Oraculo (v3) — endurecido.
+Oraculo (v4).
 
-Mudancas vs v2 (que tinha band-aids):
-- Em vez de `if False:` desabilitando a comparacao de ratio, o oraculo agora DETECTA
-  quando os dois logs medem distribuicoes diferentes (ex: o real colapsou em 1 task no
-  ambiente 1-core, enquanto o sintetico tem spread). Isso vira um AVISO honesto
-  ("ambiente colapsou — rode multi-core para validar o ratio"), nao um fail silencioso
-  nem um green forjado.
-- Usa apexlib para isolar o stage de reduce do join (compara mesma-coisa-com-mesma-coisa).
-- Compara: operador de join (hard), volume da task quente (com tolerancia), e ratio
-  (apenas quando ambos os lados tem spread — senao reporta o colapso).
+Sobre a v3:
+- Emite um AUDIT TRAIL com o scenario_hash do sintetico (cadeia de custodia).
+- Com o P1 #5 corrigido, o ratio do sintetico (~28x) bate com o real (~29.5x), entao a
+  comparacao de ratio foi REABILITADA (nao mais `if False:`). Se um lado colapsar em
+  1 task (1-core), reporta o colapso honestamente em vez de falhar.
 """
 import sys
 import yaml
@@ -23,58 +19,58 @@ from apex import apexlib
 def signals(log_path):
     events = apexlib.read_events(log_path)
     op, used_final = apexlib.join_operator(events)
-    _, records = apexlib.hottest_reduce_stage(events)
+    _, records = apexlib.hottest_reduce_stage(events, join_op=op)
     m = apexlib.skew_metrics(records)
-    return {"join_op": op, "used_final_plan": used_final, **m}
+    prov = next((e for e in events if e.get("Event") == "ApexSyntheticProvenance"), None)
+    return {"join_op": op, "used_final_plan": used_final,
+            "provenance": prov.get("scenario_hash") if prov else None, **m}
 
 
 def main(scenario_path, synthetic_log, real_log):
-    tol = yaml.safe_load(open(scenario_path))["oracle"]["tolerance"]
+    scenario = yaml.safe_load(open(scenario_path))
+    tol = scenario["oracle"]["tolerance"]
     s, r = signals(synthetic_log), signals(real_log)
-    print(f"sintetico: join={s['join_op']} hot={s['hot']} ratio={s['ratio']} tasks={s['n_tasks']}")
-    print(f"real:      join={r['join_op']} hot={r['hot']} ratio={r['ratio']} tasks={r['n_tasks']}")
+
+    print("--- AUDIT TRAIL ---")
+    print(f"scenario:   {scenario['scenario_id']} (hash {apexlib.compute_scenario_hash(scenario_path)})")
+    print(f"synthetic:  {synthetic_log}  provenance={s['provenance']}")
+    print(f"real:       {real_log}  provenance={r['provenance'] or 'n/a (log real)'}")
+    print("---")
+    print(f"join:  synthetic={s['join_op']}  real={r['join_op']}")
+    print(f"hot:   synthetic={s['hot']}  real={r['hot']}")
+    print(f"ratio: synthetic={s['ratio']}  real={r['ratio']}")
 
     problems, warnings = [], []
 
-    # 1. Operador de join: tem que bater (hard).
     if s["join_op"] != r["join_op"]:
         problems.append(f"join operator divergiu: {s['join_op']} vs {r['join_op']}")
 
-    # 2. Volume da task quente: com tolerancia (sinal estavel entre ambientes).
     if r["hot"]:
         rec_dev = abs(s["hot"] - r["hot"]) / r["hot"]
         if rec_dev > tol["records"]:
-            problems.append(
-                f"registros da task quente divergiram {rec_dev:.0%} (tolerancia {tol['records']:.0%})"
-            )
+            problems.append(f"registros da task quente divergiram {rec_dev:.0%} (tol {tol['records']:.0%})")
 
-    # 3. Ratio: so compara se AMBOS tem spread (>1 task). Se um colapsou, reporta honestamente.
+    # Ratio reabilitado (P1 #5 corrigido). Se um lado colapsou em 1 task, reporta honestamente.
     if s["collapsed"] or r["collapsed"]:
         lado = "real" if r["collapsed"] else "sintetico"
-        warnings.append(
-            f"o lado {lado} colapsou em 1 task (AQE/1-core) — ratio nao comparavel. "
-            f"Rode o job em cluster multi-core para validar a cauda da distribuicao."
-        )
+        warnings.append(f"lado {lado} colapsou em 1 task (AQE/1-core) — rode multi-core para comparar ratio")
     elif r["ratio"] and r["ratio"] != float("inf"):
         ratio_dev = abs(s["ratio"] - r["ratio"]) / r["ratio"]
         if ratio_dev > tol["skew_ratio"]:
-            problems.append(
-                f"skew ratio divergiu {ratio_dev:.0%} (tolerancia {tol['skew_ratio']:.0%})"
-            )
+            problems.append(f"skew ratio divergiu {ratio_dev:.0%} (tol {tol['skew_ratio']:.0%})")
 
     for w in warnings:
         print(f"⚠️  {w}")
-
     if problems:
         print("\n❌ ORACULO: o sintetico DESVIOU do Spark real:")
         for p in problems:
             print("  -", p)
         sys.exit(1)
-    print("\n✅ ORACULO: sintetico fiel ao Spark real dentro da tolerancia. Fidelidade OK.")
+    print("\n✅ ORACULO: sintetico fiel ao Spark real dentro da tolerancia.")
 
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
-        print("Uso: compare.py <scenario.yaml> <synthetic.ndjson> <real.ndjson|.zstd>")
+        print("Uso: compare.py <scenario.yaml> <synthetic.ndjson> <real.ndjson|.zstd|dir>")
         sys.exit(1)
     main(sys.argv[1], sys.argv[2], sys.argv[3])

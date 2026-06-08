@@ -10,12 +10,12 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: pip install -r requirements.txt
-      - name: Testes (eval como teste)
-        run: pytest tests/ -v
-      - name: Slice vertical de cada cenario
+      - name: Testes
+        run: python3 -m pytest tests/ -v
+      - name: Slice por cenario
         run: |
           for s in scenarios/*.yaml; do
-            python generators/code_generator.py "$s" job.py
-            python generators/plan_generator.py "$s" log.ndjson
-            python watchers/skew_watcher.py "$s" log.ndjson
+            python3 generators/code_generator.py "$s" job.py
+            python3 generators/plan_generator.py "$s" log.ndjson
+            python3 watchers/skew_watcher.py "$s" log.ndjson
           done

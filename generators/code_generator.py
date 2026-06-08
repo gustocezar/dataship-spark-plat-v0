@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
 """
-Gerador de codigo (v4) — adiciona scenario_hash ao manifesto (cadeia de custodia).
+Gerador de codigo (v4) — sentinela + cadeia de custodia.
+
+Sobre a v3: o manifesto agora carrega o scenario_hash, o generator_version e o timestamp,
+formando a cadeia de custodia. O plan_generator embute o mesmo hash no log sintetico; o
+Watcher cruza os dois. A linha do anti-pattern continua sendo OUTPUT derivado (sentinela).
 """
 import sys
 import json
-import hashlib
 import yaml
+from datetime import datetime, timezone
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from apex import apexlib
 
 SENTINEL = "# APEX::ANTIPATTERN"
-
-
-def compute_scenario_hash(scenario_path: str) -> str:
-    with open(scenario_path, "rb") as f:
-        h = hashlib.sha256(f.read()).hexdigest()[:16]
-    return f"sha256:{h}"
+GENERATOR_VERSION = "4"
 
 
 def build_job_source(config):
@@ -50,18 +53,18 @@ spark.stop()
 def generate_job(scenario_path, output_path):
     config = yaml.safe_load(open(scenario_path))
     source, actual_line = build_job_source(config)
-    scenario_hash = compute_scenario_hash(scenario_path)
 
     with open(output_path, "w") as f:
         f.write(source)
 
     manifest = {
         "scenario_id": config["scenario_id"],
-        "scenario_hash": scenario_hash,
+        "scenario_hash": apexlib.compute_scenario_hash(scenario_path),
+        "generator_version": GENERATOR_VERSION,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
         "job_file": output_path,
         "anti_pattern_line": actual_line,
         "anti_pattern_class": config["anti_pattern"]["class"],
-        "generator_version": "v4",
     }
     meta_path = output_path.rsplit(".", 1)[0] + ".meta.json"
     with open(meta_path, "w") as f:
@@ -71,10 +74,11 @@ def generate_job(scenario_path, output_path):
     if declared is not None and declared != actual_line:
         print(
             f"⚠️  scenario declara anti_pattern_line={declared}, mas caiu na {actual_line}. "
-            f"Manifesto registra a linha real ({actual_line}); atualize o scenario se quiser.",
+            f"Manifesto registra a linha real ({actual_line}).",
             file=sys.stderr,
         )
-    print(f"✅ {output_path} gerado. Anti-pattern na linha {actual_line}. Manifesto: {meta_path}")
+    print(f"✅ {output_path} gerado. Anti-pattern na linha {actual_line}. "
+          f"Manifesto: {meta_path} (hash {manifest['scenario_hash']})")
 
 
 if __name__ == "__main__":
